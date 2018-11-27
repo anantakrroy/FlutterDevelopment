@@ -19,7 +19,7 @@ class Home extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Expanded(
-                      child: Text(
+                    child: Text(
                     "Flight",
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
@@ -27,10 +27,11 @@ class Home extends StatelessWidget {
                       fontFamily: 'NotoSansTC',
                       color: Colors.white,
                       fontStyle: FontStyle.normal,
+                      fontSize: 20.0,
                     ),
                   )),
                   Expanded(
-                      child: Text(
+                    child: Text(
                     "Trains",
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
@@ -38,6 +39,7 @@ class Home extends StatelessWidget {
                       fontFamily: 'NotoSansTC',
                       color: Colors.white,
                       fontStyle: FontStyle.normal,
+                      fontSize: 20.0,
                     ),
                   )),
                 ],
@@ -46,29 +48,32 @@ class Home extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                       child: Text(
-                    "Flight",
+                    "Buses",
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
                       decoration: TextDecoration.none,
                       fontFamily: 'NotoSansTC',
                       color: Colors.white,
                       fontStyle: FontStyle.normal,
+                      fontSize: 20.0,
                     ),
                   )),
                   Expanded(
                       child: Text(
-                    "Trains",
+                    "Cabs",
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
                       decoration: TextDecoration.none,
                       fontFamily: 'NotoSansTC',
                       color: Colors.white,
                       fontStyle: FontStyle.normal,
+                      fontSize: 20.0,
                     ),
                   )),
                 ],
               ),
-              TravelImageAsset()
+              TravelImageAsset(),
+              BookButton()
             ],
           )),
     );
@@ -79,8 +84,40 @@ class TravelImageAsset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AssetImage assetImage = AssetImage('images/travel.jpg');
-    Image image = Image(image: assetImage, width: 250.0,height: 250.0,);
-    return Container(child: image,);
+    Image image = Image(
+      image: assetImage,
+      width: 350.0,
+      height: 250.0,
+    );
+    return Container(
+      child: image,
+    );
   }
+}
 
+class BookButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20.0),
+      width: 250.0,
+      height: 50.0,
+      child: RaisedButton(
+        color: Colors.indigoAccent,
+        padding: EdgeInsets.all(10.0),
+        child: Text(
+          'Book Ticket',
+          textAlign: TextAlign.justify,
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Raleway-ExtraBoldItalic',
+            fontSize: 15.0,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        onPressed: () {},
+      ),
+    );
+  }
 }
