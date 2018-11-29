@@ -19,7 +19,7 @@ class Home extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Expanded(
-                    child: Text(
+                      child: Text(
                     "Flight",
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
                     ),
                   )),
                   Expanded(
-                    child: Text(
+                      child: Text(
                     "Trains",
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
@@ -80,6 +80,7 @@ class Home extends StatelessWidget {
   }
 }
 
+//Image asset
 class TravelImageAsset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -95,6 +96,7 @@ class TravelImageAsset extends StatelessWidget {
   }
 }
 
+//Raised Button
 class BookButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -105,19 +107,36 @@ class BookButton extends StatelessWidget {
       child: RaisedButton(
         color: Colors.indigoAccent,
         padding: EdgeInsets.all(10.0),
+        elevation: 6.0,
         child: Text(
           'Book Ticket',
           textAlign: TextAlign.justify,
           style: TextStyle(
-            color: Colors.white,
             fontFamily: 'Raleway-ExtraBoldItalic',
+            color: Colors.black,
             fontSize: 15.0,
-            fontStyle: FontStyle.normal,
+            // fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w800,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          bookTicket(context);
+        },
       ),
     );
+  }
+
+  //Dialog box
+  void bookTicket(BuildContext context) {
+    var alertDialog = AlertDialog(
+      title: Text("Ticket booked successfully"),
+      content: Text("Have a happy journey"),
+    );
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
   }
 }
