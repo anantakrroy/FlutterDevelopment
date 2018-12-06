@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: "Stateful App Example",
+    debugShowCheckedModeBanner: false,
+    title: 'Stateful App Example',
     home: FavoriteCity(),
   )); 
 }
@@ -10,7 +11,6 @@ void main() {
 class FavoriteCity extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _FavoriteCityState();
   }
 }
@@ -18,9 +18,12 @@ class FavoriteCity extends StatefulWidget {
 class _FavoriteCityState extends State<FavoriteCity> {
 
   String nameOfCity = "";    //the property which may change
+  var _currencies = ['Rupee','Dollar','Pound','Others'];
+  var _currentItemSelected = 'Rupee';
+
   @override
   Widget build(BuildContext context) {
-    debugPrint("Favorite city widget is created");
+    // debugPrint("Favorite city widget is created");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -32,13 +35,34 @@ class _FavoriteCityState extends State<FavoriteCity> {
          child: Column(
            children: <Widget>[
              TextField(
-               onSubmitted: (String userInput) {
+               onChanged: (String userInput) {
                  setState(() {
-                  debugPrint("setState is called, this tells the framework to redraw the FavoriteCity widget");
+                  // debugPrint("setState is called, this tells the framework to redraw the FavoriteCity widget");
                   nameOfCity = userInput;           
                 });
                },
              ),
+
+             DropdownButton<String>(
+               items: _currencies.map((String dropDownStringItem) {
+                 return DropdownMenuItem<String>(
+                   value: dropDownStringItem,
+                   child: Text(dropDownStringItem),
+                 );
+               }).toList(),
+
+               onChanged: (String currencySelected) {
+                 setState(() {
+                    this._currentItemSelected = currencySelected;
+                  });
+               },
+
+               value: _currentItemSelected,
+
+               elevation: 2,
+                  
+             ),
+
              Padding(
                padding: EdgeInsets.all(15.0),
                child: Text(
