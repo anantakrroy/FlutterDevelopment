@@ -12,20 +12,20 @@ class SIForm extends StatefulWidget {
 class _SIFormState extends State<SIForm> {
   @override
   Widget build(BuildContext context) {
+
+    TextStyle textStyle = Theme.of(context).textTheme.title;
     // TODO: implement build
-    return MaterialApp(
-      title: "SI form",
-      home: Scaffold(
-        // backgroundColor: Colors.teal[100],
+    return Scaffold(
         appBar: AppBar(
           title: Text('Simple Interest Calculator'),
-          backgroundColor: Colors.green,
         ),
         body: Container(
-          child: Column(children: <Widget>[
+          margin: EdgeInsets.all(10.0),
+          child: ListView(children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.only(top:10.0, bottom: 10.0),
               child: Image(
+                color: Colors.greenAccent,
                 alignment: Alignment.center,
                 width: 500.0,
                 height: 125.0,
@@ -33,57 +33,69 @@ class _SIFormState extends State<SIForm> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.only(top:10.0, bottom: 10.0),
               child: TextField(
+                keyboardType: TextInputType.number,
+                style: textStyle,
                 decoration: InputDecoration(
                   hintText: 'Enter amount invested',
                   labelText: "Principal",
+                  labelStyle: textStyle,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.zero,
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                 ),
                 // controller: TextEditingController(),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
               child: TextField(
+                keyboardType: TextInputType.number,
+                style: textStyle,
                 decoration: InputDecoration(
                     hintText: 'Enter the return percentage',
                     labelText: 'Return Percentage',
+                    labelStyle: textStyle,
                     border:
-                        OutlineInputBorder(borderRadius: BorderRadius.zero)),
+                        OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
               child: Row(
                 children: <Widget>[
-                  Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.all(15.0),
+                  Expanded(
                       child: TextField(
+                        keyboardType: TextInputType.number,
+                        style: textStyle,
                         decoration: InputDecoration(
                             hintText: 'Enter time period',
                             labelText: 'Time period',
+                            labelStyle: textStyle,
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.zero)),
+                                borderRadius: BorderRadius.circular(5.0))),
                       ),
-                    ),
                   ),
-                  CurrencySelector(),
+
+                  Container(width: 50.0),
+
+                  Expanded(
+                    child: CurrencySelector(),
+                  )
                 ],
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(5.0),
               child: Row(
                 children: <Widget>[
                   Expanded(
                     child: RaisedButton(
+                      color: Theme.of(context).primaryColor,
+                      textColor: Theme.of(context).primaryColorDark,
                       elevation: 2.0,
-                      padding: EdgeInsets.all(10.0),
-                      child: Text('Calculate'),
+                      child: Text('Calculate', textScaleFactor: 1.5,),
                       onPressed: () {
                         debugPrint('Calculate button pressed');
                       },
@@ -91,10 +103,11 @@ class _SIFormState extends State<SIForm> {
                   ),
                   Expanded(
                     child: RaisedButton(
-                      color: Colors.lightGreen,
+                      color: Theme.of(context).primaryColorDark,
+                      textColor: Theme.of(context).primaryColorLight,
                       elevation: 2.0,
-                      padding: EdgeInsets.all(10.0),
-                      child: Text('Reset'),
+                      padding: EdgeInsets.all(5.0),
+                      child: Text('Reset', textScaleFactor: 1.5,),
                       onPressed: () {
                         debugPrint('Reset button pressed');
                       },
@@ -104,7 +117,6 @@ class _SIFormState extends State<SIForm> {
               ),
             ),
           ]),
-        )),
-    );
+        ));
   }
 }
