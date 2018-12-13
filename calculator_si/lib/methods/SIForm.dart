@@ -10,10 +10,16 @@ class SIForm extends StatefulWidget {
 }
 
 class _SIFormState extends State<SIForm> {
+  TextEditingController principalController = TextEditingController();
+  TextEditingController rateController = TextEditingController();
+  TextEditingController termController = TextEditingController();
+
+  var displayResult = '';
+
   @override
   Widget build(BuildContext context) {
-
     TextStyle textStyle = Theme.of(context).textTheme.title;
+
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
@@ -23,7 +29,7 @@ class _SIFormState extends State<SIForm> {
           margin: EdgeInsets.all(10.0),
           child: ListView(children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top:10.0, bottom: 10.0),
+              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
               child: Image(
                 color: Colors.greenAccent,
                 alignment: Alignment.center,
@@ -33,10 +39,11 @@ class _SIFormState extends State<SIForm> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top:10.0, bottom: 10.0),
+              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
               child: TextField(
                 keyboardType: TextInputType.number,
                 style: textStyle,
+                controller: principalController,
                 decoration: InputDecoration(
                   hintText: 'Enter amount invested',
                   labelText: "Principal",
@@ -53,12 +60,13 @@ class _SIFormState extends State<SIForm> {
               child: TextField(
                 keyboardType: TextInputType.number,
                 style: textStyle,
+                controller: rateController,
                 decoration: InputDecoration(
                     hintText: 'Enter the return percentage',
                     labelText: 'Return Percentage',
                     labelStyle: textStyle,
-                    border:
-                        OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
               ),
             ),
             Padding(
@@ -66,20 +74,19 @@ class _SIFormState extends State<SIForm> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        style: textStyle,
-                        decoration: InputDecoration(
-                            hintText: 'Enter time period',
-                            labelText: 'Time period',
-                            labelStyle: textStyle,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5.0))),
-                      ),
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      style: textStyle,
+                      controller: termController,
+                      decoration: InputDecoration(
+                          hintText: 'Enter time period',
+                          labelText: 'Time period',
+                          labelStyle: textStyle,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0))),
+                    ),
                   ),
-
                   Container(width: 50.0),
-
                   Expanded(
                     child: CurrencySelector(),
                   )
@@ -95,9 +102,14 @@ class _SIFormState extends State<SIForm> {
                       color: Theme.of(context).primaryColor,
                       textColor: Theme.of(context).primaryColorDark,
                       elevation: 2.0,
-                      child: Text('Calculate', textScaleFactor: 1.5,),
+                      child: Text(
+                        'Calculate',
+                        textScaleFactor: 1.5,
+                      ),
                       onPressed: () {
-                        debugPrint('Calculate button pressed');
+                        setState(() {
+                          this.displayResult = _calculateReturns();
+                        });
                       },
                     ),
                   ),
@@ -107,7 +119,10 @@ class _SIFormState extends State<SIForm> {
                       textColor: Theme.of(context).primaryColorLight,
                       elevation: 2.0,
                       padding: EdgeInsets.all(5.0),
-                      child: Text('Reset', textScaleFactor: 1.5,),
+                      child: Text(
+                        'Reset',
+                        textScaleFactor: 1.5,
+                      ),
                       onPressed: () {
                         debugPrint('Reset button pressed');
                       },
@@ -116,7 +131,23 @@ class _SIFormState extends State<SIForm> {
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(displayResult, style: textStyle,),
+            )
           ]),
         ));
+  }
+
+  String _calculateReturns() {
+    double principal = double.parse(principalController.text);
+    double rate = double.parse(rateController.text);
+    double term = double.parse(termController.text);
+
+    double totalAmount = principal * rate * term / 100 + principal;
+
+    String totalAmountStatement =
+        'Total amount payable after $term years is $totalAmount';
+    return totalAmountStatement;
   }
 }
