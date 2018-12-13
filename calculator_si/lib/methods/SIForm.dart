@@ -14,6 +14,8 @@ class _SIFormState extends State<SIForm> {
   TextEditingController rateController = TextEditingController();
   TextEditingController termController = TextEditingController();
 
+  var _currency = ['Rupee', 'USD', 'GBP', 'Others'];
+  var _currentItemSelected = 'Rupee';
   var displayResult = '';
 
   @override
@@ -88,7 +90,21 @@ class _SIFormState extends State<SIForm> {
                   ),
                   Container(width: 50.0),
                   Expanded(
-                    child: CurrencySelector(),
+                    child:  DropdownButton<String>(
+                      items: _currency.map((String dropDownStringItem) {
+                      return DropdownMenuItem<String>(
+                        value: dropDownStringItem,
+                        child: Text(dropDownStringItem),
+                       );
+                      }).toList(),
+
+                      onChanged: (String currencySelected) {
+                        setState(() {
+                          this._currentItemSelected = currencySelected;
+                        });
+                      },
+                      value: _currentItemSelected,
+                    )
                   )
                 ],
               ),
@@ -124,7 +140,9 @@ class _SIFormState extends State<SIForm> {
                         textScaleFactor: 1.5,
                       ),
                       onPressed: () {
-                        debugPrint('Reset button pressed');
+                        setState(() {
+                          _reset();                          
+                        });
                       },
                     ),
                   )
@@ -147,7 +165,15 @@ class _SIFormState extends State<SIForm> {
     double totalAmount = principal * rate * term / 100 + principal;
 
     String totalAmountStatement =
-        'Total amount payable after $term years is $totalAmount';
+        'Total amount payable after $term years is $totalAmount $_currentItemSelected';
     return totalAmountStatement;
+  }
+
+  void _reset() {
+    principalController.text = '';
+    rateController.text = '';
+    termController.text = '';
+    displayResult = '';
+    _currentItemSelected = _currency[0];
   }
 }

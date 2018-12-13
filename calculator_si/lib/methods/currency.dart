@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 class CurrencySelector extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _dropDownCurrency();
+    return dropDownCurrency();
   }
 }
 
-class _dropDownCurrency extends State<CurrencySelector> {
+class dropDownCurrency extends State<CurrencySelector> {
   var _currency = ['Rupee', 'USD', 'GBP', 'Others'];
-  var _currentItemSelected = 'Rupee';
+  var currentItemSelected = 'Rupee';
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +25,10 @@ class _dropDownCurrency extends State<CurrencySelector> {
 
         onChanged: (String currencySelected) {
           setState(() {
-            this._currentItemSelected = currencySelected;
+            this.currentItemSelected = currencySelected;
           });
         },
-        value: _currentItemSelected,
+        value: currentItemSelected,
         ); 
   }
 }
