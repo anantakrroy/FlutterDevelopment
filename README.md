@@ -5,8 +5,8 @@ Learning Flutter - The Complete Flutter development course for iOS and Android b
 
 1. Calculator_SI - A simple interest calculator
 
-<img src="./calculator_si/app_demo/calculator.png" alt="alt text" width="200" height="400"/>
+<img src="./calculator_si/app_demo/calculator.png" alt="App screenshot" width="250" height="400"/>
 
 Short App demo -
 
-![Alt Text](./calculator_si/app_demo/appflow.gif)
+<img src="./calculator_si/app_demo/appflow.gif" alt="App demo" width="250" height="400"/>
