@@ -5,7 +5,7 @@ Learning Flutter - The Complete Flutter development course for iOS and Android b
 
 1. Calculator_SI - A simple interest calculator
 
-![App screenshot](./Desktop/calculator.png)
+![App screenshot](./app_demo/calculator.png)
 
 The app demo for this simple calculator
 ![Alt Text](https://drive.google.com/open?id=1QiYVxHXrBB_QptQ2tWVD0GxVMTcbAKlO "App demo")
