@@ -5,6 +5,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/calculator_si/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/calculator_si/build" />
+      <excludeFolder url="file://$MODULE_DIR$/notekeeper/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/notekeeper/build" />
       <excludeFolder url="file://$MODULE_DIR$/stateful_fun/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/stateful_fun/build" />
       <excludeFolder url="file://$MODULE_DIR$/widgets_fun/.pub" />

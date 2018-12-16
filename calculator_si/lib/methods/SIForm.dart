@@ -216,5 +216,6 @@ class _SIFormState extends State<SIForm> {
     termController.text = '';
     displayResult = '';
     _currentItemSelected = _currency[0];
+    
   }
 }
