@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:calculator_si/methods/currency.dart';
 import 'package:calculator_si/methods/SIForm.dart';
 
 void main() {
