@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notekeeper/screens/notedetail.dart';
 
 class NoteList extends StatefulWidget {
   @override
@@ -22,8 +23,10 @@ class NoteListState extends State<NoteList> {
         backgroundColor: Colors.deepPurple,
         onPressed: (){
           debugPrint('Button pressed');
+          navigateToDetail('Add note');
         },
-        child: Icon(Icons.add),
+        tooltip: 'Add note',
+        child: Icon(Icons.add)
       ),
     );
   }
@@ -38,7 +41,6 @@ class NoteListState extends State<NoteList> {
        return Card(
          color: Colors.white,
          elevation: 2.0,
-
          child: ListTile(
            leading: CircleAvatar(
              backgroundColor: Colors.yellow,
@@ -47,14 +49,20 @@ class NoteListState extends State<NoteList> {
            title: Text('Dummy title',style: titleStyle,),
            subtitle: Text('Again dummy date',),
            trailing: Icon(Icons.delete, color: Colors.grey),
-
            onTap: () {
              debugPrint('Next screen');
+             navigateToDetail('Edit note');
            },
          ),
       );
       },
     );
+  }
+
+  void navigateToDetail(String title) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return NoteDetail(title);
+    }));
   }
 }
 
