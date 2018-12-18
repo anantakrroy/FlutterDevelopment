@@ -7,9 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65790550-eaa1-4866-9103-0a261fa4b479" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/FlutterDevelopment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FlutterDevelopment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calculator_si/lib/methods/SIForm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/calculator_si/lib/methods/SIForm.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notekeeper/lib/screens/notedetail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/notekeeper/lib/screens/notedetail.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
