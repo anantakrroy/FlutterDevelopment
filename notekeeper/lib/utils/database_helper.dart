@@ -50,10 +50,18 @@ void _createDb(Database db, int newVersion) async {     //function to create DB
 //functions for CRUD
 
 //FETCH
-getNoteMapList() async{
+Future<List<Map<String, dynamic>>> getNoteMapList() async{
   Database db = await this.database;
   var result = await db.query(noteTable,orderBy: '$colPriority ASC');
   return result;
 }
+
+//INSERT
+Future<int> insertNote(Note note) async{
+  Database db = await this.database;
+  var result = await db.insert(noteTable, note.toMap());
+  return result;
+}
+
 
 }
