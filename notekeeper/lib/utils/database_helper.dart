@@ -63,5 +63,38 @@ Future<int> insertNote(Note note) async{
   return result;
 }
 
+//UPDATE
+Future<int>updateNote(Note note) async{
+  var db = await this.database;
+  var result = await db.update(noteTable, note.toMap(), where: '$colId = ?', whereArgs: [note.id]);
+}
+
+//DELETE 
+Future<int> deleteNote(int id) async{ 
+  var db = await this.database;
+  int result = await db.rawDelete('DELETE FROM $noteTable WHERE $colId = $id');
+  return result;
+}
+
+//Get number of note objects in database
+Future<int> getCount()async {
+  Database db = await this.database;
+  List<Map<String, dynamic>> x = await db.rawQuery('SELECT COUNT (*) from $noteTable');
+  int result = Sqflite.firstIntValue(x);
+  return result;
+}
+
+//Get the 'Map List' [List<Map>] and convert it to 'Note List' [List<Note>]
+Future<List<Note>> getNoteList() async {
+  var noteMapList = await getNoteMapList(); // maplist from db
+  int count = noteMapList.length;           // count number of maplist entries
+
+  List<Note> noteList = List<Note>();
+  // for loop to add map list entries to ntoe list into above empty notelist
+  for(int i =0; i< count; i++){
+    noteList.add(Note.fromMapObject(noteMapList[i]));
+  }
+  return noteList;
+}
 
 }
