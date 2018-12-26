@@ -33,6 +33,7 @@ Future<Database> get database async{
   return _database;
 }
 
+// initialise database
 Future<Database> initialiseDatabase() async{
   //Get the directory path for both Android and iOS where we can store DB
   Directory directory = await  getApplicationDocumentsDirectory();
@@ -43,6 +44,7 @@ Future<Database> initialiseDatabase() async{
   return notesDatabase;
 }
 
+// create database
 void _createDb(Database db, int newVersion) async {     //function to create DB
     await db.execute('CREATE TABLE $noteTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colTitle TEXT, $colDescription TEXT, $colPriority INT,$colDate TEXT)');
   }
