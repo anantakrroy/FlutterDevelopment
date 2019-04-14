@@ -3,12 +3,22 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/assignment1/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/assignment1/build" />
       <excludeFolder url="file://$MODULE_DIR$/calculator_si/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/calculator_si/build" />
+      <excludeFolder url="file://$MODULE_DIR$/contacts_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/contacts_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/easylist/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/easylist/build" />
       <excludeFolder url="file://$MODULE_DIR$/notekeeper/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/notekeeper/build" />
+      <excludeFolder url="file://$MODULE_DIR$/roughpad/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/roughpad/build" />
       <excludeFolder url="file://$MODULE_DIR$/stateful_fun/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/stateful_fun/build" />
+      <excludeFolder url="file://$MODULE_DIR$/widgets-basics-assignment-problem/widgets-basics-assignment-problem/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/widgets-basics-assignment-problem/widgets-basics-assignment-problem/build" />
       <excludeFolder url="file://$MODULE_DIR$/widgets_fun/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/widgets_fun/build" />
     </content>

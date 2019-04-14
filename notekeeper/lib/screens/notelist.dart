@@ -25,6 +25,7 @@ class NoteListState extends State<NoteList> {
     //instantiate the note list if null
     if(noteList == null){
       noteList = List<Note>();
+      updateListView();
     }
     
     return Scaffold(
@@ -64,7 +65,7 @@ class NoteListState extends State<NoteList> {
            trailing: GestureDetector(
              child: Icon(Icons.delete, color: Colors.grey),
              onTap: (){
-               _delete(context, noteList[position])
+               _delete(context, noteList[position]);
              },
            ),
            onTap: () {
@@ -121,6 +122,11 @@ class NoteListState extends State<NoteList> {
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
+  //
+  void updateListView(){
+    
+  }
+  
   // navigate to another screen
   void navigateToDetail(String title) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {

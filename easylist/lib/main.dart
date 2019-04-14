@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
-import './product_manager.dart';
+import './pages/home.dart';
 
 void main() {
+  // debugPaintLayerBordersEnabled = true;
   runApp(MyApp());
 }
 
@@ -14,12 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         accentColor: Colors.purple,
         primaryColor: Colors.deepOrange,
+        fontFamily: 'NotoSerif',
       ),
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text("EasyList"),
-          ),
-          body: ProductManager('Food tester')),
+      home: HomePage(),
     );
   }
 }
