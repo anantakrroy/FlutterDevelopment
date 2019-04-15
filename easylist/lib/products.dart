@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import './pages/product.dart';
+import './pages/productdetail.dart';
 
 class Products extends StatelessWidget {
-  List<String> products;
+  List<Map> products;
 
-  Products([this.products = const []]) {
+  Products([this.products]) {
     //constructor to initialise
     print('[PRODUCTS WIDGET] constructor');
   }
@@ -16,7 +16,7 @@ class Products extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            child: Image.asset("assets/buffet.jpg"),
+            child: Image.asset(products[index]["image"]),
             margin: EdgeInsets.all(5.0),
             decoration: BoxDecoration(border: Border.all(width: 4.0),boxShadow: [
             BoxShadow(
@@ -27,7 +27,7 @@ class Products extends StatelessWidget {
             )
           ],),
           ),
-          Text(products[index],style: TextStyle(fontSize: 18.0,fontFamily: 'NotoSerif'),),
+          Text(products[index]["title"],style: TextStyle(fontSize: 18.0,fontFamily: 'NotoSerif'),),
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -38,7 +38,7 @@ class Products extends StatelessWidget {
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => ProductDetail(),
+                        builder: (BuildContext context) => ProductDetail(products[index]["title"],products[index]["image"]),
                       )))
             ],
           )

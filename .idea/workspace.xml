@@ -7,13 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65790550-eaa1-4866-9103-0a261fa4b479" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/FlutterDevelopment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FlutterDevelopment.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easylist/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easylist/lib/pages/product.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easylist/lib/product_control.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/product_control.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easylist/lib/product_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/product_manager.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easylist/lib/products.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/products.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easylist/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notekeeper/lib/screens/notelist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/notekeeper/lib/screens/notelist.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,10 +46,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -147,7 +145,7 @@
       <window_info anchor="right" id="Flutter Outline" order="3" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.45" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.46492538" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -167,6 +165,20 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/calculator_si/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calculator_si/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/calculator_si/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">

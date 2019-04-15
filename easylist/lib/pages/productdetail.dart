@@ -18,8 +18,8 @@ class ProductDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
              Container(child: Image.asset(imageUrl),margin: EdgeInsets.only(top: 5.0)),
-             Container(child: Text('This is the product details page',),padding: EdgeInsets.all(10.0),),
-             RaisedButton(child: Text('BACK'),onPressed: () => Navigator.pop(context),color: Colors.orange,)
+             Container(child: Text(title),padding: EdgeInsets.all(10.0),),
+             RaisedButton(child: Text('BACK'),onPressed: () => Navigator.pop(context, true),color: Colors.orange,)
           ],
         ),
       ),

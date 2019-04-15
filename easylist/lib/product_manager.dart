@@ -4,7 +4,7 @@ import './products.dart';
 import './product_control.dart';
 
 class ProductManager extends StatefulWidget {
-  final String startingProduct;
+  final Map startingProduct;
 
   // named argument - OPTIONAL
   ProductManager({this.startingProduct}) {
@@ -19,7 +19,7 @@ class ProductManager extends StatefulWidget {
 }
 
 class _ProductManagerState extends State<ProductManager> {
-  List<String> _products = [];
+  List<Map> _products = [];
 
   @override
   //No need for set state because initState runs before build
@@ -31,12 +31,11 @@ class _ProductManagerState extends State<ProductManager> {
     }
   }
 
-  void _addProduct(String product) {
+  void _addProduct(Map<String, String> product) {
     print('PRODUCT MANAGER _addproduct');
     setState(() {
       print('[PRODUCT MANAGER WIDGET] setState()');
       _products.add(product);
-      print(_products);
     });
   }
 
