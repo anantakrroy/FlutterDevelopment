@@ -19,7 +19,7 @@ class ProductDetail extends StatelessWidget {
           children: <Widget>[
              Container(child: Image.asset(imageUrl),margin: EdgeInsets.only(top: 5.0)),
              Container(child: Text(title),padding: EdgeInsets.all(10.0),),
-             RaisedButton(child: Text('BACK'),onPressed: () => Navigator.pop(context, true),color: Colors.orange,)
+             RaisedButton(child: Text('DELETE'),onPressed: () => Navigator.pop(context, true),color: Colors.orange,)
           ],
         ),
       ),

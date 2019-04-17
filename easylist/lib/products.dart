@@ -4,8 +4,9 @@ import './pages/productdetail.dart';
 
 class Products extends StatelessWidget {
   List<Map> products;
+  final Function deleteProduct;
 
-  Products([this.products]) {
+  Products(this.products, {this.deleteProduct}) {
     //constructor to initialise
     print('[PRODUCTS WIDGET] constructor');
   }
@@ -18,28 +19,40 @@ class Products extends StatelessWidget {
           Container(
             child: Image.asset(products[index]["image"]),
             margin: EdgeInsets.all(5.0),
-            decoration: BoxDecoration(border: Border.all(width: 4.0),boxShadow: [
-            BoxShadow(
-              color: Colors.yellow,
-              offset: new Offset(5.0, 5.0),
-              blurRadius: 0.5,
-              spreadRadius: 0.5
-            )
-          ],),
+            decoration: BoxDecoration(
+              border: Border.all(width: 4.0),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.yellow,
+                    offset: new Offset(5.0, 5.0),
+                    blurRadius: 0.5,
+                    spreadRadius: 0.5)
+              ],
+            ),
           ),
-          Text(products[index]["title"],style: TextStyle(fontSize: 18.0,fontFamily: 'NotoSerif'),),
+          Text(
+            products[index]["title"],
+            style: TextStyle(fontSize: 18.0, fontFamily: 'NotoSerif'),
+          ),
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
-                  child: Text('Details'),
-                  color: Colors.orange,
-                  splashColor: Colors.yellow,
-                  onPressed: () => Navigator.push(
+                child: Text('Details'),
+                color: Colors.orange,
+                splashColor: Colors.yellow,
+                onPressed: () => Navigator.push<bool>(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => ProductDetail(products[index]["title"],products[index]["image"]),
-                      )))
+                        builder: (BuildContext context) => ProductDetail(
+                            products[index]["title"], products[index]["image"]),
+                      ),
+                    ).then((bool value){
+                      if(true) {
+                        deleteProduct(index);
+                      }
+                    })
+              )
             ],
           )
         ],
@@ -48,9 +61,11 @@ class Products extends StatelessWidget {
   }
 
   Widget _buildProductList() {
+    
     Widget productCard = Center(
       child: Text("No products found! Add some !"),
     );
+
     if (products.length > 0) {
       productCard = ListView.builder(
         itemBuilder: _buildProductItem,

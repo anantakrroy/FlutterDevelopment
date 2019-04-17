@@ -9,6 +9,6 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text("EasyList"),
         ),
-        body: ProductManager());
+        body: ProductManager(startingProduct: {"title" : "Sweets", "image" : "assets/buffet.jpg"},));
   }
 }
