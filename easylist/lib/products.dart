@@ -48,7 +48,7 @@ class Products extends StatelessWidget {
                             products[index]["title"], products[index]["image"]),
                       ),
                     ).then((bool value){
-                      if(true) {
+                      if(value) {
                         deleteProduct(index);
                       }
                     })
