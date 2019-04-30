@@ -16,9 +16,9 @@ class Category extends StatelessWidget {
   /// A [Category] saves the name of the Category (e.g. 'Length'), its color for
   /// the UI, and the icon that represents it (e.g. a ruler).
   // TODO: You'll need the name, color, and iconLocation from main.dart
-  var icon;
-  var name;
-  var color;
+  IconData icon;
+  String name;
+  Color color;
   double widgetHeight = 100.0;
   
   Category(String n, IconData i, Color c) {

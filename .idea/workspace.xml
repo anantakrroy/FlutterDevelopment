@@ -7,8 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65790550-eaa1-4866-9103-0a261fa4b479" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/udacity-course/course/02_category_widget/solution_02_category_widget/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/udacity-course/course/02_category_widget/solution_02_category_widget/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/udacity-course/course/02_category_widget/task_02_category_widget/lib/category.dart" beforeDir="false" afterPath="$PROJECT_DIR$/udacity-course/course/02_category_widget/task_02_category_widget/lib/category.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/udacity-course/course/02_category_widget/task_02_category_widget/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/udacity-course/course/02_category_widget/task_02_category_widget/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/udacity-course/course/03_category_route/task_03_category_route/lib/category.dart" beforeDir="false" afterPath="$PROJECT_DIR$/udacity-course/course/03_category_route/task_03_category_route/lib/category.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/udacity-course/course/03_category_route/task_03_category_route/lib/category_route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/udacity-course/course/03_category_route/task_03_category_route/lib/category_route.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/udacity-course/course/03_category_route/task_03_category_route/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/udacity-course/course/03_category_route/task_03_category_route/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/udacity-course/course/03_category_route/task_03_category_route/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/udacity-course/course/03_category_route/task_03_category_route/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,18 +41,18 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="105" />
-    <option name="width" value="1750" />
-    <option name="height" value="1090" />
+    <option name="width" value="1752" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -128,7 +134,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="84" y="0" width="1400" height="872" extended-state="0" />
+    <frame x="70" y="0" width="1168" height="728" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
@@ -142,7 +148,7 @@
       <window_info anchor="right" id="Flutter Outline" order="3" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.5380597" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.5694946" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -162,6 +168,20 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/calculator_si/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calculator_si/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/calculator_si/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
