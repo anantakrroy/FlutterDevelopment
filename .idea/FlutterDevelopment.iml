@@ -17,6 +17,8 @@
       <excludeFolder url="file://$MODULE_DIR$/roughpad/build" />
       <excludeFolder url="file://$MODULE_DIR$/stateful_fun/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/stateful_fun/build" />
+      <excludeFolder url="file://$MODULE_DIR$/udacity-course/bhim_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/udacity-course/bhim_app/build" />
       <excludeFolder url="file://$MODULE_DIR$/udacity-course/course/01_hello_rectangle/solution_01_hello_rectangle/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/udacity-course/course/01_hello_rectangle/solution_01_hello_rectangle/build" />
       <excludeFolder url="file://$MODULE_DIR$/udacity-course/course/02_category_widget/solution_02_category_widget/.pub" />

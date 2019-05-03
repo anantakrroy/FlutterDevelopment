@@ -20,7 +20,7 @@ class Category extends StatelessWidget {
   String name;
   Color color;
   double widgetHeight = 100.0;
-  
+
   Category(String n, IconData i, Color c) {
     this.name = n;
     this.icon = i;
@@ -37,39 +37,38 @@ class Category extends StatelessWidget {
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     // TODO: Build the custom widget here, referring to the Specs.
-    return InkWell(
-      splashColor: Colors.green,
-      child: Container(
-        padding: EdgeInsets.all(8.0),
-        height: widgetHeight,
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 1.0,
-            color: Colors.white,
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(widgetHeight / 2)),
-        ),
-        child: Row(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[ 
-            Container(
-              padding: EdgeInsets.all(16.0),
-              child: Icon(
-                icon,
-                size: 60.0,
+    return Material(
+      color: Colors.green[100],
+      shadowColor: Colors.green[100],
+      elevation: 0.0,
+      borderOnForeground: false,
+      child: InkWell(
+        splashColor: color,
+        child: Container(
+          padding: EdgeInsets.all(8.0),
+          height: widgetHeight,
+          child: Row(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(16.0),
+                child: Icon(
+                  icon,
+                  size: 60.0,
+                ),
               ),
-            ),
-            Text(
-              name,
-              style: TextStyle(fontSize: 24.0),
-            ),
-          ],
+              Text(
+                name,
+                style: TextStyle(fontSize: 24.0),
+              ),
+            ],
+          ),
         ),
+        onTap: () {
+          print("I was tapped");
+        },
       ),
-      onTap: () {
-        print("I was tapped");
-      },
     );
   }
 }
