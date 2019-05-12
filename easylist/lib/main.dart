@@ -1,3 +1,4 @@
+import 'package:easylist/pages/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.deepOrange,
         fontFamily: 'NotoSerif',
       ),
-      home: HomePage(),
+      home: AuthPage(),
     );
   }
 }
