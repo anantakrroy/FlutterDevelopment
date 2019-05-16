@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easylist/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easylist/lib/pages/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/pages/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easylist/lib/pages/productmanage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/pages/productmanage.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,10 +45,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
       <pane id="AndroidView" />
+      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -143,7 +144,7 @@
       <window_info anchor="right" id="Flutter Outline" order="3" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.6592262" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.6927083" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />

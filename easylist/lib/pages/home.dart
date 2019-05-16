@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: Drawer(
-          child: Column(
+            child: Column(
           children: <Widget>[
             AppBar(
               automaticallyImplyLeading: false,
@@ -18,8 +18,7 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Text("Manage Products"),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProductManage(),
-                ));
+                Navigator.pushReplacementNamed(context, '/admin');
               },
             ),
           ],
@@ -28,7 +27,7 @@ class HomePage extends StatelessWidget {
           title: Text("EasyList"),
         ),
         body: ProductManager(
-          startingProduct: {"title": "Sweets", "image": "assets/buffet.jpg"},
-        ));
+            //startingProduct: {"title": "Sweets", "image": "assets/buffet.jpg"},
+            ));
   }
 }
