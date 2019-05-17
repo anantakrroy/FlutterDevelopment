@@ -38,21 +38,15 @@ class Products extends StatelessWidget {
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
-                child: Text('Details'),
-                color: Colors.orange,
-                splashColor: Colors.yellow,
-                onPressed: () => Navigator.push<bool>(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => ProductDetail(
-                            products[index]["title"], products[index]["image"]),
-                      ),
-                    ).then((bool value){
-                      if(value) {
-                        deleteProduct(index);
-                      }
-                    })
-              )
+                  child: Text('Details'),
+                  color: Colors.orange,
+                  splashColor: Colors.yellow,
+                  onPressed: () => Navigator.pushNamed<bool>(context, '/product/' + index.toString())
+                          .then((bool value) {
+                        if (value) {
+                          deleteProduct(index);
+                        }
+                      }))
             ],
           )
         ],
@@ -61,7 +55,6 @@ class Products extends StatelessWidget {
   }
 
   Widget _buildProductList() {
-    
     Widget productCard = Center(
       child: Text("No products found! Add some !"),
     );
