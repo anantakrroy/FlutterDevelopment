@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Text("Manage Products"),
               onTap: () {
-                Navigator.pushReplacementNamed(context, '/admin');
+                Navigator.pushReplacementNamed(context, '/admins');
               },
             ),
           ],
