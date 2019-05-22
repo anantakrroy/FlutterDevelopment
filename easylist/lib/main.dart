@@ -48,18 +48,23 @@ class _MyAppState extends State<MyApp> {
         primaryColor: Colors.deepOrange,
         fontFamily: 'NotoSerif',
       ),
+
+      // Named routes, routes registry
       routes: {
         '/': (BuildContext context) =>
             HomePage(_products, _addProduct, _deleteProduct),
         '/admin': (BuildContext context) => ProductManage(),
       },
+
+      // Generate custom routes
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
-        final int index = int.parse(pathElements[2]);
+
         if (pathElements[0] != '') {
           return null;
         }
         if (pathElements[1] == "product") {
+          final int index = int.parse(pathElements[2]);
           return MaterialPageRoute<bool>(
             builder: (BuildContext context) => ProductDetail(
                 _products[index]["title"], _products[index]["image"]),
@@ -68,6 +73,8 @@ class _MyAppState extends State<MyApp> {
 
         return null;
       },
+
+      //default fall back route
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute(
           builder: (BuildContext context) =>

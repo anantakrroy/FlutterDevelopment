@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../product_manager.dart';
 
 class HomePage extends StatelessWidget {
-
   final List<Map<String, String>> products;
   final Function addProduct;
   final Function deleteProduct;
