@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-import './pages/productdetail.dart';
-
 class Products extends StatelessWidget {
-  List<Map> products;
-  final Function deleteProduct;
+  List<Map<String, dynamic>> products;
 
-  Products(this.products, {this.deleteProduct}) {
+  Products(this.products) {
     //constructor to initialise
     print('[PRODUCTS WIDGET] constructor');
   }
@@ -38,15 +35,12 @@ class Products extends StatelessWidget {
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
-                  child: Text('Details'),
-                  color: Colors.orange,
-                  splashColor: Colors.yellow,
-                  onPressed: () => Navigator.pushNamed<bool>(context, '/product/' + index.toString())
-                          .then((bool value) {
-                        if (value) {
-                          deleteProduct(index);
-                        }
-                      }))
+                child: Text('Details'),
+                color: Colors.orange,
+                splashColor: Colors.yellow,
+                onPressed: () => Navigator.pushNamed<bool>(
+                    context, '/product/' + index.toString()),
+              )
             ],
           )
         ],

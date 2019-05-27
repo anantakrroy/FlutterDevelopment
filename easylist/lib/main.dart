@@ -1,11 +1,8 @@
-import 'package:easylist/pages/auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import './pages/home.dart';
 import './pages/productmanage.dart';
-import './pages/auth.dart';
+
 import './pages/productdetail.dart';
 
 void main() {
@@ -22,9 +19,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Map<String, String>> _products = [];
+  List<Map<String, dynamic>> _products = [];
 
-  void _addProduct(Map<String, String> product) {
+  void _addProduct(Map<String, dynamic> product) {
     print('PRODUCT MANAGER _addproduct');
     setState(() {
       print('[PRODUCT MANAGER WIDGET] setState()');
@@ -51,9 +48,9 @@ class _MyAppState extends State<MyApp> {
 
       // Named routes, routes registry
       routes: {
-        '/': (BuildContext context) =>
-            HomePage(_products, _addProduct, _deleteProduct),
-        '/admin': (BuildContext context) => ProductManage(),
+        '/': (BuildContext context) => HomePage(_products),
+        '/admin': (BuildContext context) =>
+            ProductManage(_addProduct, _deleteProduct),
       },
 
       // Generate custom routes
@@ -77,8 +74,7 @@ class _MyAppState extends State<MyApp> {
       //default fall back route
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute(
-          builder: (BuildContext context) =>
-              HomePage(_products, _addProduct, _deleteProduct),
+          builder: (BuildContext context) => HomePage(_products),
         );
       },
     );

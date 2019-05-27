@@ -1,11 +1,16 @@
-import 'package:easylist/pages/home.dart';
+
 import 'package:easylist/pages/product_create.dart';
 import 'package:easylist/pages/product_list.dart';
-import 'package:easylist/pages/productdetail.dart';
-import 'package:easylist/products.dart';
+
 import 'package:flutter/material.dart';
 
 class ProductManage extends StatelessWidget {
+
+  final Function addProduct;
+  final Function deleteProduct;
+
+  ProductManage(this.addProduct, this.deleteProduct);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -44,7 +49,7 @@ class ProductManage extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            ProductCreate(),
+            ProductCreate(addProduct),
             ProductList(),
           ],
         ),

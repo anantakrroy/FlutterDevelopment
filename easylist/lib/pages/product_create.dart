@@ -1,7 +1,11 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 class ProductCreate extends StatefulWidget {
+  final Function addProduct;
+
+  ProductCreate(this.addProduct);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -13,6 +17,7 @@ class _ProductCreateState extends State<ProductCreate> {
   String titleText = '';
   double productPrice = 0.0;
   String productDescription = '';
+  String imageUrl = 'assets/buffet.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +71,13 @@ class _ProductCreateState extends State<ProductCreate> {
           child: RaisedButton(
             child: Text('Create'),
             onPressed: () {
-              
+              final Map<String, dynamic> product = {
+                'title': titleText,
+                'description': productDescription,
+                'price': productPrice,
+                'image' : 'assets/buffet.jpg',
+              };
+              widget.addProduct(product);
             },
           ),
         )
