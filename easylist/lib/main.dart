@@ -1,3 +1,4 @@
+import 'package:easylist/pages/auth.dart';
 import 'package:flutter/material.dart';
 
 import './pages/home.dart';
@@ -48,7 +49,8 @@ class _MyAppState extends State<MyApp> {
 
       // Named routes, routes registry
       routes: {
-        '/': (BuildContext context) => HomePage(_products),
+        '/': (BuildContext context) => AuthPage(),
+        '/home': (BuildContext context) => HomePage(_products),
         '/admin': (BuildContext context) =>
             ProductManage(_addProduct, _deleteProduct),
       },
