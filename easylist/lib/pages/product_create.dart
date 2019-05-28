@@ -69,6 +69,8 @@ class _ProductCreateState extends State<ProductCreate> {
         ),
         Center(
           child: RaisedButton(
+            color: Theme.of(context).accentColor,
+            textColor: Colors.white,
             child: Text('Create'),
             onPressed: () {
               final Map<String, dynamic> product = {
@@ -78,6 +80,7 @@ class _ProductCreateState extends State<ProductCreate> {
                 'image' : 'assets/buffet.jpg',
               };
               widget.addProduct(product);
+              Navigator.pushReplacementNamed(context,'/');
             },
           ),
         )
