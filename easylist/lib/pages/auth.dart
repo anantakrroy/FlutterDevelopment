@@ -1,9 +1,12 @@
-
 import 'package:flutter/material.dart';
+import 'package:validators/validators.dart';
 
 class AuthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String emailId = '';
+    String password = '';
+
     // TODO: implement build
     return MaterialApp(
       title: "Login",
@@ -27,9 +30,13 @@ class AuthPage extends StatelessWidget {
                     flex: 1,
                   ),
                   Expanded(
-                    child:TextField(
+                    child: EditableText(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(hintText: "Enter Email Id"),
+                      onChanged: (String value) {
+                        emailId = value;
+                        isEmail(emailId) ? Editable Text('Valid email') : Text('Invalid email');
+                      },
                     ),
                     flex: 3,
                   ),
@@ -41,7 +48,10 @@ class AuthPage extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Text("Password",textScaleFactor: 1.25,),
+                    child: Text(
+                      "Password",
+                      textScaleFactor: 1.25,
+                    ),
                     flex: 1,
                   ),
                   Padding(
@@ -53,6 +63,9 @@ class AuthPage extends StatelessWidget {
                         hintText: "Enter Password",
                       ),
                       obscureText: true,
+                      onChanged: (String value) {
+                        password = value;
+                      },
                     ),
                     flex: 3,
                   ),
@@ -62,13 +75,19 @@ class AuthPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 5.0),
               child: RaisedButton(
-                color: Theme.of(context).accentColor,
+                // color: Theme.of(context).accentColor,
                 child: Text(
                   'LOGIN',
                   style: TextStyle(color: Colors.white),
                 ),
+                disabledColor: Colors.grey,
+                disabledTextColor: Colors.white,
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/home');
+                  if (emailId == "" || password == "") {
+                    _showAlertDialog(context);
+                  } else {
+                    Navigator.pushReplacementNamed(context, '/home');
+                  }
                 },
               ),
             ),
@@ -77,4 +96,18 @@ class AuthPage extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showAlertDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('ERROR'),
+        content: Text('Email or password cannot be empty!'),
+        backgroundColor: Colors.purple[50],
+        elevation: 2.0,
+      );
+    }
+  );
 }
