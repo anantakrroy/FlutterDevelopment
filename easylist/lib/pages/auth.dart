@@ -27,7 +27,7 @@ class AuthPage extends StatelessWidget {
                     flex: 1,
                   ),
                   Expanded(
-                    child: TextField(
+                    child:TextField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(hintText: "Enter Email Id"),
                     ),
