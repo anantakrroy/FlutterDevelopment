@@ -80,7 +80,7 @@ class _ProductCreateState extends State<ProductCreate> {
                 'image' : 'assets/buffet.jpg',
               };
               widget.addProduct(product);
-              Navigator.pushReplacementNamed(context,'/');
+              Navigator.pushReplacementNamed(context,'/home');
             },
           ),
         )

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:validators/validators.dart';
 
 class AuthPage extends StatefulWidget {
@@ -13,6 +15,8 @@ class _AuthPageState extends State<AuthPage> {
   String emailId = '';
   String password = '';
   bool _acceptTerms = false;
+  String _errorMessage = '';
+  Color _borderColor = Colors.blue[300];
 
   FocusNode _emailNode = FocusNode();
   FocusNode _passwordNode = FocusNode();
@@ -44,16 +48,20 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                   Expanded(
                     child: TextField(
+                      
                       focusNode: _emailNode,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
+                          errorText: _errorMessage,
                           hintText: "Enter Email Id",
-                          border: OutlineInputBorder()),
+                          border: OutlineInputBorder(borderSide: BorderSide(color: _borderColor))),
                       onChanged: (String value) {
                         emailId = value;
-                        isEmail(emailId)
-                            ? Text('Valid email')
-                            : Text('Invalid email');
+                        setState(() {
+                          isEmail(value)
+                              ? _errorMessage = ""
+                              : _errorMessage = "Enter valid email";
+                        });
                       },
                       onEditingComplete: () {
                         FocusScope.of(context).requestFocus(_passwordNode);
@@ -141,4 +149,14 @@ void _showAlertDialog(BuildContext context) {
           elevation: 2.0,
         );
       });
+}
+
+void _showErrorEmail() {
+  Container(
+    child: Tooltip(
+      message: "Enter valid email",
+    ),
+    height: 5.0,
+    width: 20.0,
+  );
 }

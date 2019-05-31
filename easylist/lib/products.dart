@@ -27,9 +27,39 @@ class Products extends StatelessWidget {
               ],
             ),
           ),
-          Text(
-            products[index]["title"],
-            style: TextStyle(fontSize: 18.0, fontFamily: 'NotoSerif'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 15.0),
+                child: Text(
+                  products[index]["title"],
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      fontFamily: 'NotoSerif',
+                      fontWeight: FontWeight.w900),
+                ),
+              ),
+              SizedBox(
+                width: 20.0,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 3.0),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).accentColor,
+                    borderRadius: BorderRadius.circular(4.0)),
+                child: Text(
+                  '\$' + products[index]["price"].toString(),
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey,width: 1.0),
+              borderRadius: BorderRadius.circular(4.0),),
+            child: Padding(padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),child: Text("FARMERS MARKET, LAKESIDE")),
           ),
           ButtonBar(
             alignment: MainAxisAlignment.center,
