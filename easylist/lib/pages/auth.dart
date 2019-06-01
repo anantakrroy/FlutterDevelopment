@@ -33,111 +33,108 @@ class _AuthPageState extends State<AuthPage> {
           backgroundColor: Theme.of(context).accentColor,
         ),
         body: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage("assets/background.jpeg"),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.dstATop),
-            )),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          "Email",
-                          textScaleFactor: 1.25,
-                        ),
-                        flex: 1,
-                      ),
-                      Expanded(
-                        child: TextField(
-                          focusNode: _emailNode,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                              errorText: _errorMessage,
-                              hintText: "Enter Email Id",
-                              border: OutlineInputBorder()),
-                          onChanged: (String value) {
-                            emailId = value;
-                            setState(() {
-                              isEmail(value)
-                                  ? _errorMessage = ""
-                                  : _errorMessage = "Enter valid email";
-                            });
-                          },
-                          onEditingComplete: () {
-                            FocusScope.of(context).requestFocus(_passwordNode);
-                          },
-                        ),
-                        flex: 3,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          "Password",
-                          textScaleFactor: 1.25,
-                        ),
-                        flex: 1,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 3.0, right: 3.0),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          focusNode: _passwordNode,
-                          decoration: InputDecoration(
-                            hintText: "Enter Password",
-                            border: OutlineInputBorder(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+            image: AssetImage("assets/background.jpeg"),
+            fit: BoxFit.fill,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.3), BlendMode.dstATop),
+          )),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            focusNode: _emailNode,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.purple[50],
+                                labelText: "Email",
+                                errorText: _errorMessage,
+                                hintText: "Enter Email Id",
+                                border: OutlineInputBorder()),
+                            onChanged: (String value) {
+                              emailId = value;
+                              setState(() {
+                                isEmail(value)
+                                    ? _errorMessage = ""
+                                    : _errorMessage = "Enter valid email";
+                              });
+                            },
+                            onEditingComplete: () {
+                              FocusScope.of(context)
+                                  .requestFocus(_passwordNode);
+                            },
                           ),
-                          obscureText: true,
-                          onChanged: (String value) {
-                            password = value;
-                          },
+                          flex: 3,
                         ),
-                        flex: 3,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  child: SwitchListTile(
-                    value: _acceptTerms,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _acceptTerms = value;
-                      });
-                    },
-                    title: Text('Accept Terms'),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 5.0),
-                  child: RaisedButton(
-                    color: Theme.of(context).accentColor,
-                    child: Text(
-                      'LOGIN',
-                      style: TextStyle(color: Colors.white),
+                      ],
                     ),
-                    onPressed: () {
-                      if (emailId == "" || password == "") {
-                        _showAlertDialog(context);
-                      } else {
-                        Navigator.pushReplacementNamed(context, '/home');
-                      }
-                    },
                   ),
-                ),
-              ],
-            )),
+                  Container(
+                    margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            focusNode: _passwordNode,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.purple[50],
+                              labelText: "Password",
+                              hintText: "Enter Password",
+                              border: OutlineInputBorder(),
+                            ),
+                            obscureText: true,
+                            onChanged: (String value) {
+                              password = value;
+                            },
+                          ),
+                          flex: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: SwitchListTile(
+                      activeColor: Colors.purple,
+                      value: _acceptTerms,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _acceptTerms = value;
+                        });
+                      },
+                      title: Text('Accept Terms'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 5.0),
+                    child: RaisedButton(
+                      color: Theme.of(context).accentColor,
+                      child: Text(
+                        'LOGIN',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        if (emailId == "" || password == "") {
+                          _showAlertDialog(context);
+                        } else {
+                          Navigator.pushReplacementNamed(context, '/home');
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
