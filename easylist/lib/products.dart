@@ -57,19 +57,30 @@ class Products extends StatelessWidget {
           ),
           DecoratedBox(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey,width: 1.0),
-              borderRadius: BorderRadius.circular(4.0),),
-            child: Padding(padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),child: Text("FARMERS MARKET, LAKESIDE")),
+              border: Border.all(color: Colors.grey, width: 1.0),
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),
+                child: Text("FARMERS MARKET, LAKESIDE")),
           ),
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlatButton(
-                child: Text('Details'),
-                color: Colors.orange,
-                splashColor: Colors.yellow,
+              IconButton(
+                icon: Icon(Icons.info),
+                color: Colors.blue,
+                splashColor: Colors.blueAccent,
                 onPressed: () => Navigator.pushNamed<bool>(
                     context, '/product/' + index.toString()),
+              ), 
+              IconButton(
+                icon: Icon(Icons.favorite_border),
+                color: Colors.red,
+                splashColor: Colors.redAccent,
+                onPressed: () {
+                   
+                },
               )
             ],
           )
