@@ -52,7 +52,13 @@ class ProductDetail extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
         ),
-        body: Center(
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [Colors.amber[900], Colors.amber[300]],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight),
+          ),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,7 +68,7 @@ class ProductDetail extends StatelessWidget {
                     color: Colors.purpleAccent[100],
                     border: Border.all(width: 1.5),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(5.0),
+                      Radius.circular(10.0),
                     ),
                   ),
                   child: Image.asset(imageUrl),

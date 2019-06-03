@@ -1,3 +1,4 @@
+import 'package:easylist/pages/widgets/price_tag.dart';
 import 'package:flutter/material.dart';
 
 class Products extends StatelessWidget {
@@ -53,17 +54,7 @@ class Products extends StatelessWidget {
                     SizedBox(
                       width: 20.0,
                     ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 6.0, vertical: 3.0),
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
-                          borderRadius: BorderRadius.circular(4.0)),
-                      child: Text(
-                        '\$' + products[index]["price"].toString(),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    PriceTag(products[index]['price']),
                   ],
                 ),
                 DecoratedBox(
