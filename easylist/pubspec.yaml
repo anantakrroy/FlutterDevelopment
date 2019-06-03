@@ -61,6 +61,7 @@ flutter:
         - asset: fonts/Noto_Serif/NotoSerif-Regular.ttf
         - asset: fonts/Noto_Serif/NotoSerif-Italic.ttf
           style: italic
+        - asset: fonts/Noto_Serif/NotoSerif-Bold.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

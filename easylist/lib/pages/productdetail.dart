@@ -1,11 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:flutter/painting.dart';
 
 class ProductDetail extends StatelessWidget {
   final String title;
   final String imageUrl;
+  final String prodDescription;
+  final double prodPrice;
 
-  ProductDetail(this.title, this.imageUrl);
+  ProductDetail(
+      this.title, this.imageUrl, this.prodPrice, this.prodDescription);
 
   _showWarningDialog(BuildContext context) {
     showDialog(
@@ -39,7 +45,7 @@ class ProductDetail extends StatelessWidget {
     return WillPopScope(
       onWillPop: () {
         print("Back button pressed");
-        Navigator.pop(context,false);
+        Navigator.pop(context, false);
         return Future.value(false);
       },
       child: Scaffold(
@@ -52,11 +58,92 @@ class ProductDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
+                  decoration: BoxDecoration(
+                    color: Colors.purpleAccent[100],
+                    border: Border.all(width: 1.5),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5.0),
+                    ),
+                  ),
                   child: Image.asset(imageUrl),
-                  margin: EdgeInsets.only(top: 5.0)),
+                  margin: EdgeInsets.only(top: 10.0)),
               Container(
-                child: Text(title),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        title,
+                        style: TextStyle(
+                            fontFamily: 'NotoSerif',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24.0),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 1.0,
+                                  spreadRadius: 2.0,
+                                  offset: Offset.fromDirection(0.0))
+                            ],
+                            color: Theme.of(context).accentColor,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.0))),
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Text(
+                            '\$' + prodPrice.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+
+                      // Text(prodPrice.toString()),
+                    ],
+                  ),
+                ),
                 padding: EdgeInsets.all(10.0),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey, width: 2.0),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4.0),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.map),
+                        onPressed: () {},
+                      ),
+                      SizedBox(
+                        width: 15.0,
+                      ),
+                      Text(
+                        'FRUIT SPOT, HOGG MARKET',
+                        style: TextStyle(fontFamily: 'NotoSerif'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                ),
+                child: Text(
+                  prodDescription,
+                ),
               ),
               RaisedButton(
                 child: Text('DELETE'),

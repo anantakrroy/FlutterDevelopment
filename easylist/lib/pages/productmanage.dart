@@ -27,7 +27,7 @@ class ProductManage extends StatelessWidget {
                 leading: Icon(Icons.shop),
                 title: Text("Product List"),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, '/');
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
               ),
             ],
