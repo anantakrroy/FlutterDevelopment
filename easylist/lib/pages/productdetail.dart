@@ -1,3 +1,5 @@
+import 'package:easylist/pages/ui_elements/title_default.dart';
+import 'package:easylist/pages/widgets/address_tag.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -78,13 +80,7 @@ class ProductDetail extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        title,
-                        style: TextStyle(
-                            fontFamily: 'NotoSerif',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 24.0),
-                      ),
+                      TitleDefault(title),
                       SizedBox(
                         width: 10.0,
                       ),
@@ -134,10 +130,7 @@ class ProductDetail extends StatelessWidget {
                       SizedBox(
                         width: 15.0,
                       ),
-                      Text(
-                        'FRUIT SPOT, HOGG MARKET',
-                        style: TextStyle(fontFamily: 'NotoSerif'),
-                      ),
+                      AddressTag("FARMERS MARKET, LAKESIDE"),
                     ],
                   ),
                 ),
