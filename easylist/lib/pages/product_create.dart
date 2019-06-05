@@ -19,12 +19,10 @@ class _ProductCreateState extends State<ProductCreate> {
   String productDescription = '';
   String imageUrl = 'assets/buffet.jpg';
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ListView(
-      children: <Widget>[
-        Padding(
+
+////////////PRODUCT TITLE FIELD/////////////////////////////
+  Widget _buildProducTitleField() {
+    return Padding(
           padding: EdgeInsets.all(10.0),
           child: TextField(
             textAlign: TextAlign.center,
@@ -36,8 +34,12 @@ class _ProductCreateState extends State<ProductCreate> {
               });
             },
           ),
-        ),
-        Padding(
+        );
+  }
+
+  //////////PRODUCT PRICE FIELD////////////////////////////
+  Widget _buildProductPriceField() {
+    return Padding(
           padding: EdgeInsets.all(10.0),
           child: TextField(
             textAlign: TextAlign.center,
@@ -50,8 +52,12 @@ class _ProductCreateState extends State<ProductCreate> {
               });
             },
           ),
-        ),
-        Padding(
+        );
+  }
+
+  //////////PRODUCT DESCRIPTION FIELD///////////////////////////
+  Widget _buildProductDescriptionField() {
+    return Padding(
           padding: EdgeInsets.all(10.0),
           child: TextField(
             maxLines: 3,
@@ -66,8 +72,12 @@ class _ProductCreateState extends State<ProductCreate> {
               });
             },
           ),
-        ),
-        Center(
+        );
+  }
+
+  ///////////PRODUCT CREATE BUTTON///////////////////////////////
+  Widget _buildProductCreateButton() {
+  return Center(
           child: RaisedButton(
             color: Theme.of(context).accentColor,
             textColor: Colors.white,
@@ -83,7 +93,18 @@ class _ProductCreateState extends State<ProductCreate> {
               Navigator.pushReplacementNamed(context,'/home');
             },
           ),
-        )
+        );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return ListView(
+      children: <Widget>[
+        _buildProducTitleField(),
+        _buildProductPriceField(),
+        _buildProductDescriptionField(),
+        _buildProductCreateButton(),
       ],
     );
   }
