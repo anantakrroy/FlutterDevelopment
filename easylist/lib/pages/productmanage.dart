@@ -11,13 +11,8 @@ class ProductManage extends StatelessWidget {
 
   ProductManage(this.addProduct, this.deleteProduct);
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        drawer: Drawer(
+  Widget _buildSideDrawer(BuildContext context) {
+    return  Drawer(
           child: Column(
             children: <Widget>[
               AppBar(
@@ -32,7 +27,16 @@ class ProductManage extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        drawer: _buildSideDrawer(context),
         appBar: AppBar(
           title: Text("Product Admin"),
           bottom: TabBar(

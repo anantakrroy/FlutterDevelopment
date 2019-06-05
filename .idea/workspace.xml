@@ -8,6 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="65790550-eaa1-4866-9103-0a261fa4b479" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/easylist/lib/pages/auth.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/pages/auth.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easylist/lib/pages/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/pages/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easylist/lib/pages/productmanage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/pages/productmanage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easylist/lib/pages/widgets/product_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easylist/lib/pages/widgets/product_card.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,9 +45,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -141,7 +144,7 @@
       <window_info anchor="right" id="Flutter Outline" order="3" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.91741073" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.93303573" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />

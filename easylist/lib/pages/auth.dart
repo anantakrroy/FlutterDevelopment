@@ -87,6 +87,10 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double targetWidth = deviceWidth > 500.0 ? 400.0 : deviceWidth * 0.95;
+
     // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -100,51 +104,56 @@ class _AuthPageState extends State<AuthPage> {
           decoration: BoxDecoration(image: _buildBackgroundImage()),
           child: Center(
             child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: _buildEmailField(),
-                          flex: 3,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: _buildPasswordField(),
-                          flex: 3,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: _buildSwitch(),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 5.0),
-                    child: RaisedButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        'LOGIN',
-                        style: TextStyle(color: Colors.white),
+              child: Container(
+                width: targetWidth,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      margin:
+                          EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: _buildEmailField(),
+                            flex: 3,
+                          ),
+                        ],
                       ),
-                      onPressed: () {
-                        if (emailId == "" || password == "") {
-                          _showAlertDialog(context);
-                        } else {
-                          Navigator.pushReplacementNamed(context, '/home');
-                        }
-                      },
                     ),
-                  ),
-                ],
+                    Container(
+                      margin:
+                          EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: _buildPasswordField(),
+                            flex: 3,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: _buildSwitch(),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 5.0),
+                      child: RaisedButton(
+                        color: Theme.of(context).accentColor,
+                        child: Text(
+                          'LOGIN',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          if (emailId == "" || password == "") {
+                            _showAlertDialog(context);
+                          } else {
+                            Navigator.pushReplacementNamed(context, '/home');
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
