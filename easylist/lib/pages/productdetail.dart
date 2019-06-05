@@ -1,5 +1,6 @@
 import 'package:easylist/pages/ui_elements/title_default.dart';
 import 'package:easylist/pages/widgets/address_tag.dart';
+import 'package:easylist/pages/widgets/price_tag.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -42,6 +43,85 @@ class ProductDetail extends StatelessWidget {
     );
   }
 
+/////////////////   ADDRESS ICON ROW ////////////////////////////////////////////
+  Widget _buildAddressIconRow() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 2.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(4.0),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.map),
+              onPressed: () {},
+            ),
+            SizedBox(
+              width: 15.0,
+            ),
+            AddressTag("FARMERS MARKET, LAKESIDE"),
+          ],
+        ),
+      ),
+    );
+  }
+
+//////////////  TITLE PRICE ROW ///////////////////////////////////////
+  Widget _buildTitlePriceRow() {
+    return Container(
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TitleDefault(title),
+            SizedBox(
+              width: 10.0,
+            ),
+            PriceTag(this.prodPrice),
+
+            // Text(prodPrice.toString()),
+          ],
+        ),
+      ),
+      padding: EdgeInsets.all(10.0),
+    );
+  }
+
+/////////////// IMAGE CARD //////////////////////////////////////////
+
+  Widget _buildImage() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.purpleAccent[100],
+        border: Border.all(width: 1.5),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
+        ),
+      ),
+      child: Image.asset(imageUrl),
+      margin: EdgeInsets.only(top: 10.0),
+    );
+  }
+
+//////////////// DESCRIPTION BOX ////////////////////////////////////////
+  Widget _buildDescriptionBox() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+      ),
+      child: Text(
+        this.prodDescription,
+      ),
+    );
+  }
+
+//////////////  BUILD   /////////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -65,85 +145,10 @@ class ProductDetail extends StatelessWidget {
             // mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
-                  decoration: BoxDecoration(
-                    color: Colors.purpleAccent[100],
-                    border: Border.all(width: 1.5),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10.0),
-                    ),
-                  ),
-                  child: Image.asset(imageUrl),
-                  margin: EdgeInsets.only(top: 10.0)),
-              Container(
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      TitleDefault(title),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 1.0,
-                                  spreadRadius: 2.0,
-                                  offset: Offset.fromDirection(0.0))
-                            ],
-                            color: Theme.of(context).accentColor,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.0))),
-                        child: Padding(
-                          padding: EdgeInsets.all(5.0),
-                          child: Text(
-                            '\$' + prodPrice.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-
-                      // Text(prodPrice.toString()),
-                    ],
-                  ),
-                ),
-                padding: EdgeInsets.all(10.0),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2.0),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4.0),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.map),
-                        onPressed: () {},
-                      ),
-                      SizedBox(
-                        width: 15.0,
-                      ),
-                      AddressTag("FARMERS MARKET, LAKESIDE"),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                ),
-                child: Text(
-                  prodDescription,
-                ),
-              ),
+              _buildImage(),
+              _buildTitlePriceRow(),
+              _buildAddressIconRow(),
+              _buildDescriptionBox(),
               RaisedButton(
                 child: Text('DELETE'),
                 onPressed: () {

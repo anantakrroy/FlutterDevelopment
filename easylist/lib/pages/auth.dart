@@ -21,6 +21,70 @@ class _AuthPageState extends State<AuthPage> {
   FocusNode _emailNode = FocusNode();
   FocusNode _passwordNode = FocusNode();
 
+  DecorationImage _buildBackgroundImage() {
+    return DecorationImage(
+      image: AssetImage("assets/background.jpeg"),
+      fit: BoxFit.fill,
+      colorFilter:
+          ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.dstATop),
+    );
+  }
+
+  TextField _buildEmailField() {
+    return TextField(
+      focusNode: _emailNode,
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.purple[50],
+          labelText: "Email",
+          errorText: _errorMessage,
+          hintText: "Enter Email Id",
+          border: OutlineInputBorder()),
+      onChanged: (String value) {
+        emailId = value;
+        setState(() {
+          isEmail(value)
+              ? _errorMessage = ""
+              : _errorMessage = "Enter valid email";
+        });
+      },
+      onEditingComplete: () {
+        FocusScope.of(context).requestFocus(_passwordNode);
+      },
+    );
+  }
+
+  TextField _buildPasswordField() {
+    return TextField(
+      focusNode: _passwordNode,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.purple[50],
+        labelText: "Password",
+        hintText: "Enter Password",
+        border: OutlineInputBorder(),
+      ),
+      obscureText: true,
+      onChanged: (String value) {
+        password = value;
+      },
+    );
+  }
+
+  SwitchListTile _buildSwitch() {
+    return SwitchListTile(
+      activeColor: Colors.purple,
+      value: _acceptTerms,
+      onChanged: (bool value) {
+        setState(() {
+          _acceptTerms = value;
+        });
+      },
+      title: Text('Accept Terms'),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -33,13 +97,7 @@ class _AuthPageState extends State<AuthPage> {
           backgroundColor: Theme.of(context).accentColor,
         ),
         body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-            image: AssetImage("assets/background.jpeg"),
-            fit: BoxFit.fill,
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.3), BlendMode.dstATop),
-          )),
+          decoration: BoxDecoration(image: _buildBackgroundImage()),
           child: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -49,29 +107,7 @@ class _AuthPageState extends State<AuthPage> {
                     child: Row(
                       children: <Widget>[
                         Expanded(
-                          child: TextField(
-                            focusNode: _emailNode,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.purple[50],
-                                labelText: "Email",
-                                errorText: _errorMessage,
-                                hintText: "Enter Email Id",
-                                border: OutlineInputBorder()),
-                            onChanged: (String value) {
-                              emailId = value;
-                              setState(() {
-                                isEmail(value)
-                                    ? _errorMessage = ""
-                                    : _errorMessage = "Enter valid email";
-                              });
-                            },
-                            onEditingComplete: () {
-                              FocusScope.of(context)
-                                  .requestFocus(_passwordNode);
-                            },
-                          ),
+                          child: _buildEmailField(),
                           flex: 3,
                         ),
                       ],
@@ -82,36 +118,14 @@ class _AuthPageState extends State<AuthPage> {
                     child: Row(
                       children: <Widget>[
                         Expanded(
-                          child: TextField(
-                            focusNode: _passwordNode,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.purple[50],
-                              labelText: "Password",
-                              hintText: "Enter Password",
-                              border: OutlineInputBorder(),
-                            ),
-                            obscureText: true,
-                            onChanged: (String value) {
-                              password = value;
-                            },
-                          ),
+                          child: _buildPasswordField(),
                           flex: 3,
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    child: SwitchListTile(
-                      activeColor: Colors.purple,
-                      value: _acceptTerms,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _acceptTerms = value;
-                        });
-                      },
-                      title: Text('Accept Terms'),
-                    ),
+                    child: _buildSwitch(),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 5.0),
