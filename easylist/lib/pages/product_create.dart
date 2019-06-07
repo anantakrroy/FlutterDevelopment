@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ProductCreate extends StatefulWidget {
@@ -18,82 +17,83 @@ class _ProductCreateState extends State<ProductCreate> {
   double productPrice = 0.0;
   String productDescription = '';
   String imageUrl = 'assets/buffet.jpg';
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 ////////////PRODUCT TITLE FIELD/////////////////////////////
   Widget _buildProducTitleField() {
     return Padding(
-          padding: EdgeInsets.all(10.0),
-          child: TextField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-                labelText: "Product", hintText: "Enter product name"),
-            onChanged: (String value) {
+      padding: EdgeInsets.all(10.0),
+      child: TextFormField(
+        textAlign: TextAlign.center,
+        decoration: InputDecoration(
+            labelText: "Product", hintText: "Enter product name"),
+            onSaved: (String value) {
               setState(() {
-                titleText = value;
+               titleText = value; 
               });
             },
-          ),
-        );
+      ),
+    );
   }
 
   //////////PRODUCT PRICE FIELD////////////////////////////
   Widget _buildProductPriceField() {
     return Padding(
-          padding: EdgeInsets.all(10.0),
-          child: TextField(
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration:
-                InputDecoration(labelText: "Price", hintText: "Enter price"),
-            onChanged: (String value) {
+      padding: EdgeInsets.all(10.0),
+      child: TextFormField(
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.number,
+        decoration:
+            InputDecoration(labelText: "Price", hintText: "Enter price"),
+        onSaved: (String value) {
               setState(() {
-                productPrice = double.parse(value);
+               productPrice = double.parse(value); 
               });
             },
-          ),
-        );
+      ),
+    );
   }
 
   //////////PRODUCT DESCRIPTION FIELD///////////////////////////
   Widget _buildProductDescriptionField() {
     return Padding(
-          padding: EdgeInsets.all(10.0),
-          child: TextField(
-            maxLines: 3,
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-                labelText: "Description",
-                hintText: "Enter product details",
-                hintMaxLines: 3),
-            onChanged: (String value) {
+      padding: EdgeInsets.all(10.0),
+      child: TextFormField(
+        maxLines: 3,
+        textAlign: TextAlign.center,
+        decoration: InputDecoration(
+            labelText: "Description",
+            hintText: "Enter product details",
+            hintMaxLines: 3),
+        onSaved: (String value) {
               setState(() {
-                productDescription = value;
+               productDescription = value; 
               });
             },
-          ),
-        );
+      ),
+    );
   }
 
   ///////////PRODUCT CREATE BUTTON///////////////////////////////
   Widget _buildProductCreateButton() {
-  return Center(
-          child: RaisedButton(
-            color: Theme.of(context).accentColor,
-            textColor: Colors.white,
-            child: Text('Create'),
-            onPressed: () {
-              final Map<String, dynamic> product = {
-                'title': titleText,
-                'description': productDescription,
-                'price': productPrice,
-                'image' : 'assets/buffet.jpg',
-              };
-              widget.addProduct(product);
-              Navigator.pushReplacementNamed(context,'/home');
-            },
-          ),
-        );
+    return Center(
+      child: RaisedButton(
+        color: Theme.of(context).accentColor,
+        textColor: Colors.white,
+        child: Text('Create'),
+        onPressed: () {
+          _formKey.currentState.save();
+          final Map<String, dynamic> product = {
+            'title': titleText,
+            'description': productDescription,
+            'price': productPrice,
+            'image': 'assets/buffet.jpg',
+          };
+          widget.addProduct(product);
+          Navigator.pushReplacementNamed(context, '/home');
+        },
+      ),
+    );
   }
 
   @override
@@ -103,14 +103,17 @@ class _ProductCreateState extends State<ProductCreate> {
     final double targetPadding = deviceWidth - targetWidth;
 
     // TODO: implement build
-    return ListView(
-      padding: EdgeInsets.symmetric(horizontal: targetPadding),
-      children: <Widget>[
-        _buildProducTitleField(),
-        _buildProductPriceField(),
-        _buildProductDescriptionField(),
-        _buildProductCreateButton(),
-      ],
+    return Form(
+      key: _formKey,
+      child: ListView(
+        padding: EdgeInsets.symmetric(horizontal: targetPadding),
+        children: <Widget>[
+          _buildProducTitleField(),
+          _buildProductPriceField(),
+          _buildProductDescriptionField(),
+          _buildProductCreateButton(),
+        ],
+      ),
     );
   }
 }

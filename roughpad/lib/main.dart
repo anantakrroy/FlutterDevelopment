@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
+  debugPaintBaselinesEnabled = true;
   runApp(MaterialApp(
     title: 'Returning Data',
     home: HomeScreen(),
@@ -10,77 +12,21 @@ void main() {
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Returning Data Demo'),
-      ),
-      body: Center(child: SelectionButton()),
-    );
-  }
-}
-
-class SelectionButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {
-        _navigateAndDisplaySelection(context);
-      },
-      child: Text('Pick an option, any option!'),
-    );
-  }
-
-  // A method that launches the SelectionScreen and awaits the result from
-  // Navigator.pop!
-  _navigateAndDisplaySelection(BuildContext context)  async{
-    // Navigator.push returns a Future that will complete after we call
-    // Navigator.pop on the Selection Screen!
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>  SelectionScreen()),
-    );
-
-    // After the Selection Screen returns a result, hide any previous snackbars
-    // and show the new result!
-    Scaffold.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text("$result")));
-  }
-}
-
-class SelectionScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Pick an option'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RaisedButton(
-                onPressed: () {
-                  // Close the screen and return "Yep!" as the result
-                  Navigator.pop(context, 'Yep!');
-                },
-                child: Text('Yep!'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RaisedButton(
-                onPressed: () {
-                  // Close the screen and return "Nope!" as the result
-                  Navigator.pop(context, 'Nope.');
-                },
-                child: Text('Nope.'),
-              ),
-            )
-          ],
+    return Center(
+      child: OverflowBox(
+        minHeight: 25.0,
+        maxHeight: 50.0,
+        minWidth: 400.0,
+        maxWidth: 450.0,
+        // constraints: BoxConstraints(maxWidth: 150.0, maxHeight: 150.0),
+        child: DecoratedBox(
+          decoration:
+              BoxDecoration(shape: BoxShape.rectangle, color: Colors.white),
+          child: Text(
+            'Overflow box ',
+          ),
         ),
+        alignment: Alignment.center,
       ),
     );
   }
