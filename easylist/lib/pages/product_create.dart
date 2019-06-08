@@ -24,6 +24,11 @@ class _ProductCreateState extends State<ProductCreate> {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: TextFormField(
+        validator: (String value) {
+          if(value.trim().length <= 0) {
+            return 'Title is required';
+          }
+        },
         textAlign: TextAlign.center,
         decoration: InputDecoration(
             labelText: "Product", hintText: "Enter product name"),
@@ -82,6 +87,9 @@ class _ProductCreateState extends State<ProductCreate> {
         textColor: Colors.white,
         child: Text('Create'),
         onPressed: () {
+          if (!_formKey.currentState.validate()) {
+            return;
+          };
           _formKey.currentState.save();
           final Map<String, dynamic> product = {
             'title': titleText,
