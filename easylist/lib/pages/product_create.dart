@@ -13,11 +13,15 @@ class ProductCreate extends StatefulWidget {
 }
 
 class _ProductCreateState extends State<ProductCreate> {
-  String titleText = '';
-  double productPrice = 0.0;
-  String productDescription = '';
-  String imageUrl = 'assets/buffet.jpg';
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  
+    final Map<String,dynamic> _product = {
+            'title' : '',
+            'price' : '',
+            'description' : '',
+            'image' : 'assets/buffet.jpg',
+    }; 
+ 
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 ////////////PRODUCT TITLE FIELD/////////////////////////////
   Widget _buildProducTitleField() {
@@ -33,9 +37,7 @@ class _ProductCreateState extends State<ProductCreate> {
         decoration: InputDecoration(
             labelText: "Product", hintText: "Enter product name"),
         onSaved: (String value) {
-          setState(() {
-            titleText = value;
-          });
+         _product['title'] = value;
         },
       ),
     );
@@ -56,9 +58,7 @@ class _ProductCreateState extends State<ProductCreate> {
         decoration:
             InputDecoration(labelText: "Price", hintText: "Enter price"),
         onSaved: (String value) {
-          setState(() {
-            productPrice = double.parse(value);
-          });
+          _product['price'] = double.parse(value);
         },
       ),
     );
@@ -81,9 +81,7 @@ class _ProductCreateState extends State<ProductCreate> {
             hintText: "Enter product details",
             hintMaxLines: 3),
         onSaved: (String value) {
-          setState(() {
-            productDescription = value;
-          });
+          _product['description'] = value;
         },
       ),
     );
@@ -100,15 +98,8 @@ class _ProductCreateState extends State<ProductCreate> {
           if (!_formKey.currentState.validate()) {
             return;
           }
-          ;
-          _formKey.currentState.save();
-          final Map<String, dynamic> product = {
-            'title': titleText,
-            'description': productDescription,
-            'price': productPrice,
-            'image': 'assets/buffet.jpg',
-          };
-          widget.addProduct(product);
+          _formKey.currentState.save();  
+          widget.addProduct(_product);
           Navigator.pushReplacementNamed(context, '/home');
         },
       ),

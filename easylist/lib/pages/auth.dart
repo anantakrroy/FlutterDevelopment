@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:validators/validators.dart';
 
 class AuthPage extends StatefulWidget {
   @override
@@ -12,14 +11,20 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  String emailId = '';
-  String password = '';
-  bool _acceptTerms = false;
+  final Map<String,dynamic> _formData = {
+    'emailId' : null,
+    'password' : null,
+    'acceptTerms' : false
+  };
+
   String _errorMessage = '';
   Color _borderColor = Colors.blue[300];
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   FocusNode _emailNode = FocusNode();
   FocusNode _passwordNode = FocusNode();
+
+  ///////////////////// BACKGROUND IMAGE ////////////////////////////////////////
 
   DecorationImage _buildBackgroundImage() {
     return DecorationImage(
@@ -30,8 +35,10 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 
-  TextField _buildEmailField() {
-    return TextField(
+  //////////////////////  EMAIL FIELD ////////////////////////////////////////////
+
+  TextFormField _buildEmailField() {
+    return TextFormField(
       focusNode: _emailNode,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
@@ -41,13 +48,15 @@ class _AuthPageState extends State<AuthPage> {
           errorText: _errorMessage,
           hintText: "Enter Email Id",
           border: OutlineInputBorder()),
-      onChanged: (String value) {
-        emailId = value;
-        setState(() {
-          isEmail(value)
-              ? _errorMessage = ""
-              : _errorMessage = "Enter valid email";
-        });
+      validator: (String value) {
+        if (value.isEmpty ||
+            !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                .hasMatch(value)) {
+                  return 'Enter valid non empty email';
+                }
+      },
+      onSaved: (String value) {
+        _formData['emailId'] = value;
       },
       onEditingComplete: () {
         FocusScope.of(context).requestFocus(_passwordNode);
@@ -55,8 +64,10 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 
-  TextField _buildPasswordField() {
-    return TextField(
+//////////////////////// PASSWORD FIELD ///////////////////////////////////////
+
+  TextFormField _buildPasswordField() {
+    return TextFormField(
       focusNode: _passwordNode,
       decoration: InputDecoration(
         filled: true,
@@ -66,28 +77,45 @@ class _AuthPageState extends State<AuthPage> {
         border: OutlineInputBorder(),
       ),
       obscureText: true,
-      onChanged: (String value) {
-        password = value;
+      onSaved: (String value) {
+        _formData['password'] = value;
+      },
+      validator: (String value) {
+        if(value.isEmpty || value.length < 6) {
+          return 'Enter a non empty password with 6+ characters';
+        }
       },
     );
   }
 
+  //////////////////////////   SWITCH TILE //////////////////////////////////////
+
   SwitchListTile _buildSwitch() {
     return SwitchListTile(
       activeColor: Colors.purple,
-      value: _acceptTerms,
+      value: _formData['acceptTerms'],
       onChanged: (bool value) {
         setState(() {
-          _acceptTerms = value;
+          _formData['acceptTerms'] = value;
         });
       },
       title: Text('Accept Terms'),
     );
   }
 
+  ////////////////////// SUBMIT FORM //////////////////////////////////////////
+  void _submitForm() {
+    if(!_formKey.currentState.validate() || !_formData['acceptTerms']) {
+      return;
+    }
+    _formKey.currentState.save();
+    Navigator.pushReplacementNamed(context, '/home');
+  }
+
+  //////////////////////// BUILD //////////////////////////////////////////////
+
   @override
   Widget build(BuildContext context) {
-
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 500.0 ? 400.0 : deviceWidth * 0.95;
 
@@ -106,53 +134,50 @@ class _AuthPageState extends State<AuthPage> {
             child: SingleChildScrollView(
               child: Container(
                 width: targetWidth,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      margin:
-                          EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: _buildEmailField(),
-                            flex: 3,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin:
-                          EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: _buildPasswordField(),
-                            flex: 3,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: _buildSwitch(),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 5.0),
-                      child: RaisedButton(
-                        color: Theme.of(context).accentColor,
-                        child: Text(
-                          'LOGIN',
-                          style: TextStyle(color: Colors.white),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        margin:
+                            EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: _buildEmailField(),
+                              flex: 3,
+                            ),
+                          ],
                         ),
-                        onPressed: () {
-                          if (emailId == "" || password == "") {
-                            _showAlertDialog(context);
-                          } else {
-                            Navigator.pushReplacementNamed(context, '/home');
-                          }
-                        },
                       ),
-                    ),
-                  ],
+                      Container(
+                        margin:
+                            EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: _buildPasswordField(),
+                              flex: 3,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: _buildSwitch(),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5.0),
+                        child: RaisedButton(
+                          color: Theme.of(context).accentColor,
+                          child: Text(
+                            'LOGIN',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: _submitForm,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
