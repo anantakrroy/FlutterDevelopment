@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
         '/': (BuildContext context) => AuthPage(),
         '/home': (BuildContext context) => HomePage(_products),
         '/admin': (BuildContext context) =>
-            ProductManage(_addProduct, _deleteProduct),
+            ProductManage(addProduct: _addProduct, deleteProduct: _deleteProduct,products: _products),
       },
 
       // Generate custom routes

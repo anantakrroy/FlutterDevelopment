@@ -33,6 +33,7 @@ class _ProductCreateState extends State<ProductCreate> {
             return 'Title is required and should be 5+ characters';
           }
         },
+        initialValue: _product['title'],
         textAlign: TextAlign.center,
         decoration: InputDecoration(
             labelText: "Product", hintText: "Enter product name"),

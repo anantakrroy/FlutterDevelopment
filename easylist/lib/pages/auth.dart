@@ -11,10 +11,10 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  final Map<String,dynamic> _formData = {
-    'emailId' : null,
-    'password' : null,
-    'acceptTerms' : false
+  final Map<String, dynamic> _formData = {
+    'emailId': null,
+    'password': null,
+    'acceptTerms': false
   };
 
   String _errorMessage = '';
@@ -42,18 +42,20 @@ class _AuthPageState extends State<AuthPage> {
       focusNode: _emailNode,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.purple[50],
-          labelText: "Email",
-          errorText: _errorMessage,
-          hintText: "Enter Email Id",
-          border: OutlineInputBorder()),
+        filled: true,
+        fillColor: Colors.purple[50],
+        labelText: "Email",
+        // errorText: _errorMessage,
+        errorStyle: TextStyle(backgroundColor: Colors.red[900],color: Colors.white),
+        hintText: "Enter Email Id",
+        border: OutlineInputBorder(),
+      ),
       validator: (String value) {
         if (value.isEmpty ||
             !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                 .hasMatch(value)) {
-                  return 'Enter valid non empty email';
-                }
+          return 'Enter valid non empty email';
+        }
       },
       onSaved: (String value) {
         _formData['emailId'] = value;
@@ -74,6 +76,7 @@ class _AuthPageState extends State<AuthPage> {
         fillColor: Colors.purple[50],
         labelText: "Password",
         hintText: "Enter Password",
+        errorStyle: TextStyle(backgroundColor: Colors.red[900],color: Colors.white),
         border: OutlineInputBorder(),
       ),
       obscureText: true,
@@ -81,7 +84,7 @@ class _AuthPageState extends State<AuthPage> {
         _formData['password'] = value;
       },
       validator: (String value) {
-        if(value.isEmpty || value.length < 6) {
+        if (value.isEmpty || value.length < 6) {
           return 'Enter a non empty password with 6+ characters';
         }
       },
@@ -105,7 +108,7 @@ class _AuthPageState extends State<AuthPage> {
 
   ////////////////////// SUBMIT FORM //////////////////////////////////////////
   void _submitForm() {
-    if(!_formKey.currentState.validate() || !_formData['acceptTerms']) {
+    if (!_formKey.currentState.validate() || !_formData['acceptTerms']) {
       return;
     }
     _formKey.currentState.save();
