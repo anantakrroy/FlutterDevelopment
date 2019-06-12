@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
+import './widgets/helpers/ensure-visible.dart';
+
 class ProductEdit extends StatefulWidget {
   final Function addProduct;
   final Function updateProduct;
   final Map<String, dynamic> product;
   final int prodIndex;
 
-  ProductEdit({this.addProduct, this.updateProduct, this.product, this.prodIndex});
+  ProductEdit(
+      {this.addProduct, this.updateProduct, this.product, this.prodIndex});
 
   @override
   State<StatefulWidget> createState() {
@@ -24,24 +27,31 @@ class _ProductEditState extends State<ProductEdit> {
   };
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _titleNode = FocusNode();
+  final _priceNode = FocusNode();
+  final _descriptionNode = FocusNode();
 
 ////////////PRODUCT TITLE FIELD/////////////////////////////
   Widget _buildProducTitleField() {
     return Padding(
       padding: EdgeInsets.all(10.0),
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty || value.length < 5) {
-            return 'Title is required and should be 5+ characters';
-          }
-        },
-        initialValue: widget.product == null ? '' : widget.product['title'],
-        textAlign: TextAlign.center,
-        decoration: InputDecoration(
-            labelText: "Product", hintText: "Enter product name"),
-        onSaved: (String value) {
-          _product['title'] = value;
-        },
+      child: EnsureVisibleWhenFocused(
+        focusNode: _titleNode,
+        child: TextFormField(
+          focusNode: _titleNode,
+          validator: (String value) {
+            if (value.isEmpty || value.length < 5) {
+              return 'Title is required and should be 5+ characters';
+            }
+          },
+          initialValue: widget.product == null ? '' : widget.product['title'],
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+              labelText: "Product", hintText: "Enter product name"),
+          onSaved: (String value) {
+            _product['title'] = value;
+          },
+        ),
       ),
     );
   }
@@ -50,20 +60,25 @@ class _ProductEditState extends State<ProductEdit> {
   Widget _buildProductPriceField() {
     return Padding(
       padding: EdgeInsets.all(10.0),
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty || double.tryParse(value) == null) {
-            return 'Price required and should be a number';
-          }
-        },
-        initialValue: widget.product == null ? '' : widget.product['price'].toString(),
-        textAlign: TextAlign.center,
-        keyboardType: TextInputType.number,
-        decoration:
-            InputDecoration(labelText: "Price", hintText: "Enter price"),
-        onSaved: (String value) {
-          _product['price'] = double.parse(value);
-        },
+      child: EnsureVisibleWhenFocused(
+        focusNode: _priceNode,
+        child: TextFormField(
+          focusNode: _priceNode,
+          validator: (String value) {
+            if (value.isEmpty || double.tryParse(value) == null) {
+              return 'Price required and should be a number';
+            }
+          },
+          initialValue:
+              widget.product == null ? '' : widget.product['price'].toString(),
+          textAlign: TextAlign.center,
+          keyboardType: TextInputType.number,
+          decoration:
+              InputDecoration(labelText: "Price", hintText: "Enter price"),
+          onSaved: (String value) {
+            _product['price'] = double.parse(value);
+          },
+        ),
       ),
     );
   }
@@ -72,22 +87,27 @@ class _ProductEditState extends State<ProductEdit> {
   Widget _buildProductDescriptionField() {
     return Padding(
       padding: EdgeInsets.all(10.0),
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty || value.length < 10) {
-            return 'Description required and 10+ characters';
-          }
-        },
-        initialValue: widget.product == null ? '' : widget.product['description'],
-        maxLines: 3,
-        textAlign: TextAlign.center,
-        decoration: InputDecoration(
-            labelText: "Description",
-            hintText: "Enter product details",
-            hintMaxLines: 3),
-        onSaved: (String value) {
-          _product['description'] = value;
-        },
+      child: EnsureVisibleWhenFocused(
+        focusNode: _descriptionNode,
+        child: TextFormField(
+          focusNode: _descriptionNode,
+          validator: (String value) {
+            if (value.isEmpty || value.length < 10) {
+              return 'Description required and 10+ characters';
+            }
+          },
+          initialValue:
+              widget.product == null ? '' : widget.product['description'],
+          maxLines: 3,
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+              labelText: "Description",
+              hintText: "Enter product details",
+              hintMaxLines: 3),
+          onSaved: (String value) {
+            _product['description'] = value;
+          },
+        ),
       ),
     );
   }
@@ -98,7 +118,7 @@ class _ProductEditState extends State<ProductEdit> {
       child: RaisedButton(
         color: Theme.of(context).accentColor,
         textColor: Colors.white,
-        child: Text('Create'),
+        child: Text('SAVE'),
         onPressed: () {
           if (!_formKey.currentState.validate()) {
             return;
