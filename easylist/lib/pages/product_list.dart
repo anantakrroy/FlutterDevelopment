@@ -18,41 +18,54 @@ class ProductList extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, '/products/$index');
             },
-            child: ListTile(
-              leading: Image.asset(products[index]['image']),
-              title: Text(products[index]['title']),
-              trailing: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: 70.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) {
-                              return ProductEdit(
-                                product: products[index],
-                                updateProduct: updateProduct,
-                                prodIndex: index,
-                              );
-                            }),
-                          );
-                        },
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.green,
+            child: Dismissible(
+              key: Key(products[index]['title']),
+              background: Container(child: Icon(Icons.delete, color: Colors.white),color: Colors.red,),
+              child: ListTile(
+                contentPadding: EdgeInsets.all(2.0),
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage(products[index]['image']),
+                ),
+                title: Text(
+                  products[index]['title'],
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(
+                  '\$' + products[index]['price'].toString(),
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                  ),
+                ),
+                trailing: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 70.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return ProductEdit(
+                                  product: products[index],
+                                  updateProduct: updateProduct,
+                                  prodIndex: index,
+                                );
+                              }),
+                            );
+                          },
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.green,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
