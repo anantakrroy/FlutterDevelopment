@@ -4,8 +4,9 @@ class ProductEdit extends StatefulWidget {
   final Function addProduct;
   final Function updateProduct;
   final Map<String, dynamic> product;
+  final int prodIndex;
 
-  ProductEdit({this.addProduct, this.updateProduct, this.product});
+  ProductEdit({this.addProduct, this.updateProduct, this.product, this.prodIndex});
 
   @override
   State<StatefulWidget> createState() {
@@ -55,7 +56,7 @@ class _ProductEditState extends State<ProductEdit> {
             return 'Price required and should be a number';
           }
         },
-        initialValue: widget.product['price'].toString(),
+        initialValue: widget.product == null ? '' : widget.product['price'].toString(),
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         decoration:
@@ -77,7 +78,7 @@ class _ProductEditState extends State<ProductEdit> {
             return 'Description required and 10+ characters';
           }
         },
-        initialValue: widget.product['description'],
+        initialValue: widget.product == null ? '' : widget.product['description'],
         maxLines: 3,
         textAlign: TextAlign.center,
         decoration: InputDecoration(
@@ -91,7 +92,7 @@ class _ProductEditState extends State<ProductEdit> {
     );
   }
 
-  ///////////PRODUCT CREATE BUTTON///////////////////////////////
+  ///////////PRODUCT CREATE/EDIT BUTTON///////////////////////////////
   Widget _buildProductCreateButton() {
     return Center(
       child: RaisedButton(
@@ -103,7 +104,10 @@ class _ProductEditState extends State<ProductEdit> {
             return;
           }
           _formKey.currentState.save();
-          widget.addProduct(_product);
+          widget.product == null
+              ? widget.addProduct(_product)
+              : widget.updateProduct(_product, widget.prodIndex);
+
           Navigator.pushReplacementNamed(context, '/home');
         },
       ),

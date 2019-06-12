@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class ProductList extends StatelessWidget {
   final List<Map<String, dynamic>> products;
+  final Function updateProduct;
 
-  ProductList(this.products);
+  ProductList(this.products, this.updateProduct);
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +31,13 @@ class ProductList extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return ProductEdit(product: products[index]);
-                                }),
+                            MaterialPageRoute(builder: (BuildContext context) {
+                              return ProductEdit(
+                                product: products[index],
+                                updateProduct: updateProduct,
+                                prodIndex: index,
+                              );
+                            }),
                           );
                         },
                         child: Icon(
