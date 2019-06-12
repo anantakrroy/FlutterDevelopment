@@ -1,5 +1,5 @@
 
-import 'package:easylist/pages/product_create.dart';
+import 'package:easylist/pages/product_edit.dart';
 import 'package:easylist/pages/product_list.dart';
 
 import 'package:flutter/material.dart';
@@ -55,7 +55,7 @@ class ProductManage extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            ProductCreate(addProduct),
+            ProductEdit(addProduct: addProduct),
             ProductList(products),
           ],
         ),

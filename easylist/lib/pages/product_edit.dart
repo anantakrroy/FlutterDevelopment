@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 
-class ProductCreate extends StatefulWidget {
+class ProductEdit extends StatefulWidget {
   final Function addProduct;
+  final Function updateProduct;
+  final Map<String, dynamic> product;
 
-  ProductCreate(this.addProduct);
+  ProductEdit({this.addProduct, this.updateProduct, this.product});
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ProductCreateState();
+    return _ProductEditState();
   }
 }
 
-class _ProductCreateState extends State<ProductCreate> {
-  
-    final Map<String,dynamic> _product = {
-            'title' : '',
-            'price' : '',
-            'description' : '',
-            'image' : 'assets/buffet.jpg',
-    }; 
- 
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _ProductEditState extends State<ProductEdit> {
+  final Map<String, dynamic> _product = {
+    'title': '',
+    'price': '',
+    'description': '',
+    'image': 'assets/buffet.jpg',
+  };
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 ////////////PRODUCT TITLE FIELD/////////////////////////////
   Widget _buildProducTitleField() {
@@ -33,12 +34,12 @@ class _ProductCreateState extends State<ProductCreate> {
             return 'Title is required and should be 5+ characters';
           }
         },
-        initialValue: _product['title'],
+        initialValue: widget.product == null ? '' : widget.product['title'],
         textAlign: TextAlign.center,
         decoration: InputDecoration(
             labelText: "Product", hintText: "Enter product name"),
         onSaved: (String value) {
-         _product['title'] = value;
+          _product['title'] = value;
         },
       ),
     );
@@ -54,6 +55,7 @@ class _ProductCreateState extends State<ProductCreate> {
             return 'Price required and should be a number';
           }
         },
+        initialValue: widget.product['price'].toString(),
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         decoration:
@@ -75,6 +77,7 @@ class _ProductCreateState extends State<ProductCreate> {
             return 'Description required and 10+ characters';
           }
         },
+        initialValue: widget.product['description'],
         maxLines: 3,
         textAlign: TextAlign.center,
         decoration: InputDecoration(
@@ -99,7 +102,7 @@ class _ProductCreateState extends State<ProductCreate> {
           if (!_formKey.currentState.validate()) {
             return;
           }
-          _formKey.currentState.save();  
+          _formKey.currentState.save();
           widget.addProduct(_product);
           Navigator.pushReplacementNamed(context, '/home');
         },
@@ -112,9 +115,7 @@ class _ProductCreateState extends State<ProductCreate> {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 450.0 ? 650.0 : deviceWidth * 0.95;
     final double targetPadding = deviceWidth - targetWidth;
-
-    // TODO: implement build
-    return GestureDetector(
+    final Widget pageContent = GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
@@ -131,5 +132,15 @@ class _ProductCreateState extends State<ProductCreate> {
         ),
       ),
     );
+
+    // TODO: implement build
+    return widget.product == null
+        ? pageContent
+        : Scaffold(
+            appBar: AppBar(
+              title: Text('Edit Product'),
+            ),
+            body: pageContent,
+          );
   }
 }

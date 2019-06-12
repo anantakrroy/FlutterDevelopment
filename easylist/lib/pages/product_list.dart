@@ -1,3 +1,4 @@
+import 'package:easylist/pages/product_edit.dart';
 import 'package:flutter/material.dart';
 
 class ProductList extends StatelessWidget {
@@ -28,8 +29,12 @@ class ProductList extends StatelessWidget {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/admin');
-                          
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return ProductEdit(product: products[index]);
+                                }),
+                          );
                         },
                         child: Icon(
                           Icons.edit,
