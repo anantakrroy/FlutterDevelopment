@@ -137,7 +137,7 @@ class ProductDetail extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.amber[900], Colors.amber[300]],
+                colors: [Colors.amber[300], Colors.amber[50]],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight),
           ),

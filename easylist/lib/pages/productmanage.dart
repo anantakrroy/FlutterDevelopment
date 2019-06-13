@@ -57,7 +57,7 @@ class ProductManage extends StatelessWidget {
         body: TabBarView(
           children: <Widget>[
             ProductEdit(addProduct: addProduct),
-            ProductList(products, updateProduct),
+            ProductList(products, updateProduct, deleteProduct),
           ],
         ),
       ),
