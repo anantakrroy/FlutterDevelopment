@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import './widgets/helpers/ensure-visible.dart';
+import '../models/product.dart';
 
 class ProductEdit extends StatefulWidget {
   final Function addProduct;
   final Function updateProduct;
-  final Map<String, dynamic> product;
+  final Product product;
   final int prodIndex;
 
   ProductEdit(
@@ -44,7 +45,7 @@ class _ProductEditState extends State<ProductEdit> {
               return 'Title is required and should be 5+ characters';
             }
           },
-          initialValue: widget.product == null ? '' : widget.product['title'],
+          initialValue: widget.product == null ? '' : widget.product.title,
           textAlign: TextAlign.center,
           decoration: InputDecoration(
               labelText: "Product", hintText: "Enter product name"),
@@ -70,7 +71,7 @@ class _ProductEditState extends State<ProductEdit> {
             }
           },
           initialValue:
-              widget.product == null ? '' : widget.product['price'].toString(),
+              widget.product == null ? '' : widget.product.price.toString(),
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,
           decoration:
@@ -97,7 +98,7 @@ class _ProductEditState extends State<ProductEdit> {
             }
           },
           initialValue:
-              widget.product == null ? '' : widget.product['description'],
+              widget.product == null ? '' : widget.product.description,
           maxLines: 3,
           textAlign: TextAlign.center,
           decoration: InputDecoration(
@@ -125,14 +126,30 @@ class _ProductEditState extends State<ProductEdit> {
           }
           _formKey.currentState.save();
           widget.product == null
-              ? widget.addProduct(_product)
-              : widget.updateProduct(_product, widget.prodIndex);
+              ? widget.addProduct(
+                  Product(
+                    title: _product['title'],
+                    description: _product['description'],
+                    price: _product['price'],
+                    image: _product['image'],
+                  ),
+                )
+              : widget.updateProduct(
+                  Product(
+                    title: _product['title'],
+                    description: _product['description'],
+                    price: _product['price'],
+                    image: _product['image'],
+                  ),
+                  widget.prodIndex);
 
           Navigator.pushReplacementNamed(context, '/home');
         },
       ),
     );
   }
+
+  ///////////////////////////   BUILD   ////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {

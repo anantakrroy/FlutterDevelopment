@@ -1,6 +1,7 @@
 
 import 'package:easylist/pages/product_edit.dart';
 import 'package:easylist/pages/product_list.dart';
+import '../models/product.dart';
 
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class ProductManage extends StatelessWidget {
   final Function addProduct;
   final Function updateProduct;
   final Function deleteProduct;
-  final List<Map<String,dynamic>> products;
+  final List<Product> products;
 
   ProductManage({this.addProduct,this.updateProduct, this.deleteProduct, this.products});
 

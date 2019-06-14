@@ -5,6 +5,7 @@ import './pages/home.dart';
 import './pages/productmanage.dart';
 
 import './pages/productdetail.dart';
+import './models/product.dart';
 
 void main() {
   // debugPaintLayerBordersEnabled = true;
@@ -20,9 +21,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Map<String, dynamic>> _products = [];
+  List<Product> _products = [];
 
-  void _addProduct(Map<String, dynamic> product) {
+  void _addProduct(Product product) {
     print('PRODUCT MANAGER _addproduct');
     setState(() {
       print('[PRODUCT MANAGER WIDGET] setState()');
@@ -30,9 +31,9 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void _updateProduct(Map<String, dynamic> product, int index) {
+  void _updateProduct(Product product, int index) {
     setState(() {
-     _products[index] = product; 
+      _products[index] = product;
     });
   }
 
@@ -57,8 +58,12 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/': (BuildContext context) => AuthPage(),
         '/home': (BuildContext context) => HomePage(_products),
-        '/admin': (BuildContext context) =>
-            ProductManage(addProduct: _addProduct, deleteProduct: _deleteProduct,products: _products, updateProduct: _updateProduct,),
+        '/admin': (BuildContext context) => ProductManage(
+              addProduct: _addProduct,
+              deleteProduct: _deleteProduct,
+              products: _products,
+              updateProduct: _updateProduct,
+            ),
       },
 
       // Generate custom routes
@@ -68,11 +73,15 @@ class _MyAppState extends State<MyApp> {
         if (pathElements[0] != '') {
           return null;
         }
-        if (pathElements[1] == "product") { 
+        if (pathElements[1] == "product") {
           final int index = int.parse(pathElements[2]);
           return MaterialPageRoute<bool>(
             builder: (BuildContext context) => ProductDetail(
-                _products[index]["title"], _products[index]["image"],_products[index]["price"], _products[index]["description"]),
+              _products[index].title,
+              _products[index].image,
+              _products[index].price,
+              _products[index].description,
+            ),
           );
         }
 

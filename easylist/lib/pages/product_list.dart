@@ -1,8 +1,9 @@
 import 'package:easylist/pages/product_edit.dart';
+import '../models/product.dart';
 import 'package:flutter/material.dart';
 
 class ProductList extends StatelessWidget {
-  final List<Map<String, dynamic>> products;
+  final List<Product> products;
   final Function updateProduct;
   final Function deleteProduct;
 
@@ -49,7 +50,7 @@ class ProductList extends StatelessWidget {
         Navigator.pushNamed(context, '/products/$index');
       },
       child: Dismissible(
-        key: Key(products[index]['title']),
+        key: Key(products[index].title),
         onDismissed: (DismissDirection direction) {
           if (direction == DismissDirection.endToStart) {
             deleteProduct(index);
@@ -64,17 +65,18 @@ class ProductList extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.all(2.0),
               leading: CircleAvatar(
-                backgroundImage: AssetImage(products[index]['image']),
+                backgroundImage: AssetImage(products[index].image),
               ),
               title: Text(
-                products[index]['title'],
+                products[index].title,
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
-                '\$' + products[index]['price'].toString(),
+                '\$' + products[index].price.toString(),
+                
                 style: TextStyle(
                   color: Colors.grey[700],
                 ),
