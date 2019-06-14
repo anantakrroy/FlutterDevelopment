@@ -21,27 +21,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Product> _products = [];
-
-  void _addProduct(Product product) {
-    print('PRODUCT MANAGER _addproduct');
-    setState(() {
-      print('[PRODUCT MANAGER WIDGET] setState()');
-      _products.add(product);
-    });
-  }
-
-  void _updateProduct(Product product, int index) {
-    setState(() {
-      _products[index] = product;
-    });
-  }
-
-  void _deleteProduct(int index) {
-    setState(() {
-      _products.removeAt(index);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
