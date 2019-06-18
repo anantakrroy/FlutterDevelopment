@@ -7,6 +7,9 @@ import './pages/productmanage.dart';
 import './pages/productdetail.dart';
 import './models/product.dart';
 
+import 'package:easylist/scoped-models/products.dart';
+import 'package:scoped_model/scoped_model.dart';
+
 void main() {
   // debugPaintLayerBordersEnabled = true;
   runApp(MyApp());
@@ -24,44 +27,48 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        accentColor: Colors.purple,
-        primaryColor: Colors.deepOrange,
-        fontFamily: 'NotoSerif',
-      ),
+    return ScopedModel<ProductModel>(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          accentColor: Colors.purple,
+          primaryColor: Colors.deepOrange,
+          fontFamily: 'NotoSerif',
+        ),
 
-      // Named routes, routes registry
-      routes: {
-        '/': (BuildContext context) => AuthPage(),
-        '/home': (BuildContext context) => HomePage(),
-        '/admin': (BuildContext context) => ProductManage(),
-      },
+        // Named routes, routes registry
+        routes: {
+          '/': (BuildContext context) => AuthPage(),
+          '/home': (BuildContext context) => HomePage(),
+          '/admin': (BuildContext context) => ProductManage(),
+        },
 
-      // Generate custom routes
-      onGenerateRoute: (RouteSettings settings) {
-        final List<String> pathElements = settings.name.split('/');
+        // Generate custom routes
+        onGenerateRoute: (RouteSettings settings) {
+          final List<String> pathElements = settings.name.split('/');
 
-        if (pathElements[0] != '') {
+          if (pathElements[0] != '') {
+            return null;
+          }
+          if (pathElements[1] == "product") {
+            final int index = int.parse(pathElements[2]);
+            return MaterialPageRoute<bool>(
+              builder: (BuildContext context) =>
+                  ProductDetail(index),
+            );
+          }
+
           return null;
-        }
-        if (pathElements[1] == "product") {
-          final int index = int.parse(pathElements[2]);
-          return MaterialPageRoute<bool>(
-            builder: (BuildContext context) => ProductDetail(),
+        },
+
+        //default fall back route
+        onUnknownRoute: (RouteSettings settings) {
+          return MaterialPageRoute(
+            builder: (BuildContext context) => HomePage(),
           );
-        }
-
-        return null;
-      },
-
-      //default fall back route
-      onUnknownRoute: (RouteSettings settings) {
-        return MaterialPageRoute(
-          builder: (BuildContext context) => HomePage(),
-        );
-      },
+        },
+      ),
+      model: ProductModel(),
     );
   }
 }

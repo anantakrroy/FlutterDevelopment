@@ -1,20 +1,21 @@
 import 'package:easylist/pages/ui_elements/title_default.dart';
 import 'package:easylist/pages/widgets/address_tag.dart';
 import 'package:easylist/pages/widgets/price_tag.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/painting.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:easylist/scoped-models/products.dart';
+
+import '../models/product.dart';
+
 
 class ProductDetail extends StatelessWidget {
-  final String title;
-  final String imageUrl;
-  final String prodDescription;
-  final double prodPrice;
+  final int prodIndex;
 
-  ProductDetail(
-      this.title, this.imageUrl, this.prodPrice, this.prodDescription);
+  ProductDetail(this.prodIndex);
 
   _showWarningDialog(BuildContext context) {
     showDialog(
@@ -72,7 +73,7 @@ class ProductDetail extends StatelessWidget {
   }
 
 //////////////  TITLE PRICE ROW ///////////////////////////////////////
-  Widget _buildTitlePriceRow() {
+  Widget _buildTitlePriceRow(String title, double prodPrice) {
     return Container(
       child: Center(
         child: Row(
@@ -82,7 +83,7 @@ class ProductDetail extends StatelessWidget {
             SizedBox(
               width: 10.0,
             ),
-            PriceTag(this.prodPrice),
+            PriceTag(prodPrice),
 
             // Text(prodPrice.toString()),
           ],
@@ -94,7 +95,7 @@ class ProductDetail extends StatelessWidget {
 
 /////////////// IMAGE CARD //////////////////////////////////////////
 
-  Widget _buildImage() {
+  Widget _buildImage(String imageUrl) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.purpleAccent[100],
@@ -109,14 +110,14 @@ class ProductDetail extends StatelessWidget {
   }
 
 //////////////// DESCRIPTION BOX ////////////////////////////////////////
-  Widget _buildDescriptionBox() {
+  Widget _buildDescriptionBox(String prodDescription) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
       ),
       child: Text(
-        this.prodDescription,
+        prodDescription,
       ),
     );
   }
@@ -130,35 +131,40 @@ class ProductDetail extends StatelessWidget {
         Navigator.pop(context, false);
         return Future.value(false);
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [Colors.amber[300], Colors.amber[50]],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight),
-          ),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              _buildImage(),
-              _buildTitlePriceRow(),
-              _buildAddressIconRow(),
-              _buildDescriptionBox(),
-              RaisedButton(
-                child: Text('DELETE'),
-                onPressed: () {
-                  _showWarningDialog(context);
-                },
-                color: Colors.orange,
-              )
-            ],
-          ),
-        ),
+      child: ScopedModelDescendant(
+        builder: (BuildContext context, Widget child, ProductModel model) {
+          final Product product = model.products[prodIndex];
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(product.title),
+            ),
+            body: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.amber[300], Colors.amber[50]],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight),
+              ),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  _buildImage(product.image),
+                  _buildTitlePriceRow(product.title, product.price),
+                  _buildAddressIconRow(),
+                  _buildDescriptionBox(product.description),
+                  RaisedButton(
+                    child: Text('DELETE'),
+                    onPressed: () {
+                      _showWarningDialog(context);
+                    },
+                    color: Colors.orange,
+                  )
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import './widgets/helpers/ensure-visible.dart';
 import '../models/product.dart';
+import '../scoped-models/products.dart';
 
 class ProductEdit extends StatefulWidget {
+  final Product product;
   final Function addProduct;
   final Function updateProduct;
-  final Product product;
   final int prodIndex;
 
-  ProductEdit(
-      {this.addProduct, this.updateProduct, this.product, this.prodIndex});
+  ProductEdit({this.product, this.addProduct, this.updateProduct, this.prodIndex});
 
   @override
   State<StatefulWidget> createState() {
@@ -20,6 +21,7 @@ class ProductEdit extends StatefulWidget {
 }
 
 class _ProductEditState extends State<ProductEdit> {
+
   final Map<String, dynamic> _product = {
     'title': '',
     'price': '',
@@ -115,38 +117,45 @@ class _ProductEditState extends State<ProductEdit> {
 
   ///////////PRODUCT CREATE/EDIT BUTTON///////////////////////////////
   Widget _buildProductCreateButton() {
-    return Center(
-      child: RaisedButton(
-        color: Theme.of(context).accentColor,
-        textColor: Colors.white,
-        child: Text('SAVE'),
-        onPressed: () {
-          if (!_formKey.currentState.validate()) {
-            return;
-          }
-          _formKey.currentState.save();
-          widget.product == null
-              ? widget.addProduct(
-                  Product(
-                    title: _product['title'],
-                    description: _product['description'],
-                    price: _product['price'],
-                    image: _product['image'],
-                  ),
-                )
-              : widget.updateProduct(
-                  Product(
-                    title: _product['title'],
-                    description: _product['description'],
-                    price: _product['price'],
-                    image: _product['image'],
-                  ),
-                  widget.prodIndex);
-
-          Navigator.pushReplacementNamed(context, '/home');
-        },
-      ),
+    return ScopedModelDescendant<ProductModel>(
+      builder: (BuildContext context, Widget child, ProductModel model) {
+        return Center(
+          child: RaisedButton(
+            color: Theme.of(context).accentColor,
+            textColor: Colors.white,
+            child: Text('SAVE'),
+            onPressed: () => _submitForm(model.addProduct, model.updateProduct),
+          ),
+        );
+      },
     );
+  }
+
+  /////////////////////////// SUBMIT FORM //////////////////////////////////////////////
+  void _submitForm(Function addProduct, Function updateProduct) {
+    if (!_formKey.currentState.validate()) {
+                return;
+              }
+              _formKey.currentState.save();
+              widget.product == null
+                  ? addProduct(
+                      Product(
+                        title: _product['title'],
+                        description: _product['description'],
+                        price: _product['price'],
+                        image: _product['image'],
+                      ),
+                    )
+                  : updateProduct(
+                      Product(
+                        title: _product['title'],
+                        description: _product['description'],
+                        price: _product['price'],
+                        image: _product['image'],
+                      ),
+                      widget.prodIndex);
+
+              Navigator.pushReplacementNamed(context, '/home');
   }
 
   ///////////////////////////   BUILD   ////////////////////////////////////////////////
