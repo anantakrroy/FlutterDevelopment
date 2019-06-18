@@ -21,7 +21,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -36,13 +35,8 @@ class _MyAppState extends State<MyApp> {
       // Named routes, routes registry
       routes: {
         '/': (BuildContext context) => AuthPage(),
-        '/home': (BuildContext context) => HomePage(_products),
-        '/admin': (BuildContext context) => ProductManage(
-              addProduct: _addProduct,
-              deleteProduct: _deleteProduct,
-              products: _products,
-              updateProduct: _updateProduct,
-            ),
+        '/home': (BuildContext context) => HomePage(),
+        '/admin': (BuildContext context) => ProductManage(),
       },
 
       // Generate custom routes
@@ -55,12 +49,7 @@ class _MyAppState extends State<MyApp> {
         if (pathElements[1] == "product") {
           final int index = int.parse(pathElements[2]);
           return MaterialPageRoute<bool>(
-            builder: (BuildContext context) => ProductDetail(
-              _products[index].title,
-              _products[index].image,
-              _products[index].price,
-              _products[index].description,
-            ),
+            builder: (BuildContext context) => ProductDetail(),
           );
         }
 
@@ -70,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       //default fall back route
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute(
-          builder: (BuildContext context) => HomePage(_products),
+          builder: (BuildContext context) => HomePage(),
         );
       },
     );
