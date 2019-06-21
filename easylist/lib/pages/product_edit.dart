@@ -6,13 +6,6 @@ import '../models/product.dart';
 import '../scoped-models/products.dart';
 
 class ProductEdit extends StatefulWidget {
-  final Product product;
-  final Function addProduct;
-  final Function updateProduct;
-  final int prodIndex;
-
-  ProductEdit({this.product, this.addProduct, this.updateProduct, this.prodIndex});
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -21,7 +14,6 @@ class ProductEdit extends StatefulWidget {
 }
 
 class _ProductEditState extends State<ProductEdit> {
-
   final Map<String, dynamic> _product = {
     'title': '',
     'price': '',
@@ -134,28 +126,28 @@ class _ProductEditState extends State<ProductEdit> {
   /////////////////////////// SUBMIT FORM //////////////////////////////////////////////
   void _submitForm(Function addProduct, Function updateProduct) {
     if (!_formKey.currentState.validate()) {
-                return;
-              }
-              _formKey.currentState.save();
-              widget.product == null
-                  ? addProduct(
-                      Product(
-                        title: _product['title'],
-                        description: _product['description'],
-                        price: _product['price'],
-                        image: _product['image'],
-                      ),
-                    )
-                  : updateProduct(
-                      Product(
-                        title: _product['title'],
-                        description: _product['description'],
-                        price: _product['price'],
-                        image: _product['image'],
-                      ),
-                      widget.prodIndex);
+      return;
+    }
+    _formKey.currentState.save();
+    widget.product == null
+        ? addProduct(
+            Product(
+              title: _product['title'],
+              description: _product['description'],
+              price: _product['price'],
+              image: _product['image'],
+            ),
+          )
+        : updateProduct(
+            Product(
+              title: _product['title'],
+              description: _product['description'],
+              price: _product['price'],
+              image: _product['image'],
+            ),
+            widget.prodIndex);
 
-              Navigator.pushReplacementNamed(context, '/home');
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   ///////////////////////////   BUILD   ////////////////////////////////////////////////
@@ -184,13 +176,17 @@ class _ProductEditState extends State<ProductEdit> {
     );
 
     // TODO: implement build
-    return widget.product == null
-        ? pageContent
-        : Scaffold(
-            appBar: AppBar(
-              title: Text('Edit Product'),
-            ),
-            body: pageContent,
-          );
+    return ScopedModelDescendant(
+      builder: (BuildContext context, Widget child, ProductModel model) {
+        return model.products == null
+            ? pageContent
+            : Scaffold(
+                appBar: AppBar(
+                  title: Text('Edit Product'),
+                ),
+                body: pageContent,
+              );
+      },
+    );
   }
 }
