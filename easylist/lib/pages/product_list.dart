@@ -1,6 +1,5 @@
 import 'package:easylist/pages/product_edit.dart';
 import 'package:easylist/scoped-models/products.dart';
-import '../models/product.dart';
 import 'package:flutter/material.dart';
 
 import 'package:scoped_model/scoped_model.dart';
@@ -51,6 +50,7 @@ class ProductList extends StatelessWidget {
         key: Key(model.products[index].title),
         onDismissed: (DismissDirection direction) {
           if (direction == DismissDirection.endToStart) {
+            model.selectProduct(index);
             model.deleteProduct();
           }
         },

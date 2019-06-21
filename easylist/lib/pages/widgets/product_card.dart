@@ -1,11 +1,13 @@
 import 'package:easylist/pages/ui_elements/title_default.dart';
 import 'package:easylist/pages/widgets/address_tag.dart';
+import 'package:easylist/scoped-models/products.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 import './price_tag.dart';
 import '../../models/product.dart';
 
 class ProductCard extends StatelessWidget {
-  Product product ;
+  Product product;
 
   int prodIndex = 0;
 
@@ -23,12 +25,18 @@ class ProductCard extends StatelessWidget {
           onPressed: () => Navigator.pushNamed<bool>(
               context, '/product/' + prodIndex.toString()),
         ),
-        IconButton(
-          icon: Icon(Icons.favorite_border),
-          color: Colors.red,
-          splashColor: Colors.redAccent,
-          onPressed: () {},
-        )
+        ScopedModelDescendant<ProductModel>(
+          builder: (BuildContext context, Widget child, ProductModel model) {
+          return IconButton(
+            icon: Icon(model.products[prodIndex].isFavorite ? Icons.favorite : Icons.favorite_border),
+            color: Colors.red,
+            splashColor: Colors.redAccent,
+            onPressed: () {
+              model.selectProduct(prodIndex);
+              model.favoriteProduct();
+            },
+          );
+        })
       ],
     );
   }

@@ -15,7 +15,7 @@ class ProductModel extends Model {
   }
 
   Product get selectedProduct {
-    if(_selectedProdIndex == null) {
+    if (_selectedProdIndex == null) {
       return null;
     }
     return _products[_selectedProdIndex];
@@ -34,6 +34,21 @@ class ProductModel extends Model {
   void deleteProduct() {
     _products.removeAt(_selectedProdIndex);
     _selectedProdIndex = null;
+  }
+
+  void favoriteProduct() {
+    final bool isFavorite = false;
+    final bool favoriteStatus = !isFavorite;
+    final Product updatedProduct = Product(
+      title: selectedProduct.title,
+      description: selectedProduct.description,
+      price: selectedProduct.price,
+      image: selectedProduct.image,
+      isFavorite: favoriteStatus,
+    );
+    _products[selectedProductIndex] = updatedProduct;
+    _selectedProdIndex = null;
+    notifyListeners();
   }
 
   void selectProduct(int index) {
