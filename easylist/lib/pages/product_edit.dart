@@ -27,7 +27,7 @@ class _ProductEditState extends State<ProductEdit> {
   final _descriptionNode = FocusNode();
 
 ////////////PRODUCT TITLE FIELD/////////////////////////////
-  Widget _buildProducTitleField() {
+  Widget _buildProducTitleField(Product product) {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: EnsureVisibleWhenFocused(
@@ -39,7 +39,7 @@ class _ProductEditState extends State<ProductEdit> {
               return 'Title is required and should be 5+ characters';
             }
           },
-          initialValue: widget.product == null ? '' : widget.product.title,
+          initialValue: product == null ? '' : product.title,
           textAlign: TextAlign.center,
           decoration: InputDecoration(
               labelText: "Product", hintText: "Enter product name"),
@@ -52,7 +52,7 @@ class _ProductEditState extends State<ProductEdit> {
   }
 
   //////////PRODUCT PRICE FIELD////////////////////////////
-  Widget _buildProductPriceField() {
+  Widget _buildProductPriceField(Product product) {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: EnsureVisibleWhenFocused(
@@ -64,8 +64,7 @@ class _ProductEditState extends State<ProductEdit> {
               return 'Price required and should be a number';
             }
           },
-          initialValue:
-              widget.product == null ? '' : widget.product.price.toString(),
+          initialValue: product == null ? '' : product.price.toString(),
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,
           decoration:
@@ -79,7 +78,7 @@ class _ProductEditState extends State<ProductEdit> {
   }
 
   //////////PRODUCT DESCRIPTION FIELD///////////////////////////
-  Widget _buildProductDescriptionField() {
+  Widget _buildProductDescriptionField(Product product) {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: EnsureVisibleWhenFocused(
@@ -91,8 +90,7 @@ class _ProductEditState extends State<ProductEdit> {
               return 'Description required and 10+ characters';
             }
           },
-          initialValue:
-              widget.product == null ? '' : widget.product.description,
+          initialValue: product == null ? '' : product.description,
           maxLines: 3,
           textAlign: TextAlign.center,
           decoration: InputDecoration(
@@ -116,7 +114,8 @@ class _ProductEditState extends State<ProductEdit> {
             color: Theme.of(context).accentColor,
             textColor: Colors.white,
             child: Text('SAVE'),
-            onPressed: () => _submitForm(model.addProduct, model.updateProduct),
+            onPressed: () => _submitForm(model.addProduct, model.updateProduct,
+                model.selectedProductIndex),
           ),
         );
       },
@@ -124,12 +123,13 @@ class _ProductEditState extends State<ProductEdit> {
   }
 
   /////////////////////////// SUBMIT FORM //////////////////////////////////////////////
-  void _submitForm(Function addProduct, Function updateProduct) {
+  void _submitForm(Function addProduct, Function updateProduct,
+      [int selectedProductIndex]) {
     if (!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
-    widget.product == null
+    selectedProductIndex == null
         ? addProduct(
             Product(
               title: _product['title'],
@@ -145,19 +145,17 @@ class _ProductEditState extends State<ProductEdit> {
               price: _product['price'],
               image: _product['image'],
             ),
-            widget.prodIndex);
+          );
 
     Navigator.pushReplacementNamed(context, '/home');
   }
 
-  ///////////////////////////   BUILD   ////////////////////////////////////////////////
-
-  @override
-  Widget build(BuildContext context) {
+  /////////////////////////// PAGE CONTENT /////////////////////////////////////////////
+  Widget _buildPageContent(BuildContext context, Product product) {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 450.0 ? 650.0 : deviceWidth * 0.95;
     final double targetPadding = deviceWidth - targetWidth;
-    final Widget pageContent = GestureDetector(
+    return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
@@ -166,19 +164,25 @@ class _ProductEditState extends State<ProductEdit> {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: targetPadding),
           children: <Widget>[
-            _buildProducTitleField(),
-            _buildProductPriceField(),
-            _buildProductDescriptionField(),
+            _buildProducTitleField(product),
+            _buildProductPriceField(product),
+            _buildProductDescriptionField(product),
             _buildProductCreateButton(),
           ],
         ),
       ),
     );
+  }
 
+  ///////////////////////////   BUILD   ////////////////////////////////////////////////
+
+  @override
+  Widget build(BuildContext context) {
     // TODO: implement build
     return ScopedModelDescendant(
       builder: (BuildContext context, Widget child, ProductModel model) {
-        return model.products == null
+        final Widget pageContent =_buildPageContent(context, model.selectedProduct);
+        return model.selectedProductIndex == null
             ? pageContent
             : Scaffold(
                 appBar: AppBar(

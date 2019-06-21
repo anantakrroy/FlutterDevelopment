@@ -6,12 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class ProductList extends StatelessWidget {
-  final List<Product> products;
-  final Function updateProduct;
-  final Function deleteProduct;
-
-  ProductList(this.products, this.updateProduct, this.deleteProduct);
-
   ////////////////////////  PRODUCT EDIT BUTTON //////////////////////////////////
 
   Widget _productEditButton(BuildContext context, int index) {
@@ -19,14 +13,14 @@ class ProductList extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       child: SizedBox(
         width: 70.0,
-        child: ScopedModelDescendant(
+        child: ScopedModelDescendant<ProductModel>(
           builder: (BuildContext context, Widget child, ProductModel model) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
-                    model.selectedProduct(index);
+                    model.selectProduct(index);
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (BuildContext context) {
                         return ProductEdit();
@@ -48,16 +42,16 @@ class ProductList extends StatelessWidget {
 
 //////////////////////// PRODUCT TILE //////////////////////////////////
 
-  Widget _productTile(BuildContext context, int index) {
+  Widget _productTile(BuildContext context, int index, ProductModel model) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, '/products/$index');
       },
       child: Dismissible(
-        key: Key(products[index].title),
+        key: Key(model.products[index].title),
         onDismissed: (DismissDirection direction) {
           if (direction == DismissDirection.endToStart) {
-            deleteProduct(index);
+            model.deleteProduct();
           }
         },
         background: Container(
@@ -69,17 +63,17 @@ class ProductList extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.all(2.0),
               leading: CircleAvatar(
-                backgroundImage: AssetImage(products[index].image),
+                backgroundImage: AssetImage(model.products[index].image),
               ),
               title: Text(
-                products[index].title,
+                model.products[index].title,
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
-                '\$' + products[index].price.toString(),
+                '\$' + model.products[index].price.toString(),
                 style: TextStyle(
                   color: Colors.grey[700],
                 ),
@@ -99,14 +93,18 @@ class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: EdgeInsets.all(3.0),
-          child: _productTile(context, index),
+    return ScopedModelDescendant(
+      builder: (BuildContext context, Widget child, ProductModel model) {
+        return ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: EdgeInsets.all(3.0),
+              child: _productTile(context, index, model),
+            );
+          },
+          itemCount: model.products.length,
         );
       },
-      itemCount: products.length,
     );
   }
 }

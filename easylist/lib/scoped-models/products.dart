@@ -10,22 +10,33 @@ class ProductModel extends Model {
     return List.from(_products);
   }
 
-  void addProduct(Product product) {
-    print('PRODUCT MANAGER _addproduct');
+  int get selectedProductIndex {
+    return _selectedProdIndex;
+  }
 
-    print('[PRODUCT MANAGER WIDGET] setState()');
+  Product get selectedProduct {
+    if(_selectedProdIndex == null) {
+      return null;
+    }
+    return _products[_selectedProdIndex];
+  }
+
+  void addProduct(Product product) {
     _products.add(product);
+    _selectedProdIndex = null;
   }
 
   void updateProduct(Product product) {
     _products[_selectedProdIndex] = product;
+    _selectedProdIndex = null;
   }
 
   void deleteProduct() {
     _products.removeAt(_selectedProdIndex);
+    _selectedProdIndex = null;
   }
 
-  void selectedProduct(int index) {
+  void selectProduct(int index) {
     _selectedProdIndex = index;
   }
 }
