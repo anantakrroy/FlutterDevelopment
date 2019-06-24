@@ -21,7 +21,7 @@ Short App demo -
 
 Short App demo -
 
-<img src="./easylist/app_demo/easylist.mp4" alt="App demo" width="250" height="400"/>
+<img src="./easylist/app_demo/easylist.gif" alt="App demo" width="250" height="400"/>
 
 
 
