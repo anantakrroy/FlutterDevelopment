@@ -17,3 +17,11 @@ Short App demo -
 
 <img src="./udacity-course/bhim_app/BHIM.gif" alt="App demo" width="250" height="400"/>
 
+#### 3. Easylist - A list creation and editing app created in Flutter 
+
+Short App demo -
+
+<img src="./easylist/app_demo/easylist.mp4" alt="App demo" width="250" height="400"/>
+
+
+
