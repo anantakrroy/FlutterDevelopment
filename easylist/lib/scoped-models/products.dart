@@ -13,7 +13,7 @@ class ProductModel extends Model {
 
   List<Product> get displayedProducts {
     if (_showFavorites) {
-      return _products.where((Product product) => product.isFavorite);
+      return _products.where((Product product) => product.isFavorite).toList();
     }
     return List.from(_products);
   }
@@ -27,6 +27,10 @@ class ProductModel extends Model {
       return null;
     }
     return _products[_selectedProdIndex];
+  }
+
+  bool get displayFavoritesOnly {
+    return _showFavorites;
   }
 
   void addProduct(Product product) {
@@ -61,6 +65,8 @@ class ProductModel extends Model {
 
   void toggleDisplayMode() {
     _showFavorites = !_showFavorites;
+    notifyListeners();
+    _selectedProdIndex = null;
   }
 
   void selectProduct(int index) {

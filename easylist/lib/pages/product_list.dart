@@ -7,33 +7,30 @@ import 'package:scoped_model/scoped_model.dart';
 class ProductList extends StatelessWidget {
   ////////////////////////  PRODUCT EDIT BUTTON //////////////////////////////////
 
-  Widget _productEditButton(BuildContext context, int index) {
+  Widget _productEditButton(
+      BuildContext context, int index, ProductModel model) {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SizedBox(
         width: 70.0,
-        child: ScopedModelDescendant<ProductModel>(
-          builder: (BuildContext context, Widget child, ProductModel model) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    model.selectProduct(index);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (BuildContext context) {
-                        return ProductEdit();
-                      }),
-                    );
-                  },
-                  child: Icon(
-                    Icons.edit,
-                    color: Colors.green,
-                  ),
-                ),
-              ],
-            );
-          },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                model.selectProduct(index);
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return ProductEdit();
+                  }),
+                );
+              },
+              child: Icon(
+                Icons.edit,
+                color: Colors.green,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -78,7 +75,7 @@ class ProductList extends StatelessWidget {
                   color: Colors.grey[700],
                 ),
               ),
-              trailing: _productEditButton(context, index),
+              trailing: _productEditButton(context, index, model),
             ),
             Divider(
               color: Colors.orangeAccent[400],
