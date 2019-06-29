@@ -38,6 +38,7 @@ class _ProductEditState extends State<ProductEdit> {
             if (value.isEmpty || value.length < 5) {
               return 'Title is required and should be 5+ characters';
             }
+            return null;
           },
           initialValue: product == null ? '' : product.title,
           textAlign: TextAlign.center,
@@ -63,6 +64,7 @@ class _ProductEditState extends State<ProductEdit> {
             if (value.isEmpty || double.tryParse(value) == null) {
               return 'Price required and should be a number';
             }
+            return null;
           },
           initialValue: product == null ? '' : product.price.toString(),
           textAlign: TextAlign.center,
@@ -89,6 +91,7 @@ class _ProductEditState extends State<ProductEdit> {
             if (value.isEmpty || value.length < 10) {
               return 'Description required and 10+ characters';
             }
+            return null;
           },
           initialValue: product == null ? '' : product.description,
           maxLines: 3,
