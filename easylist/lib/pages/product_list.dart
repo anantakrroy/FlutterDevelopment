@@ -1,5 +1,5 @@
 import 'package:easylist/pages/product_edit.dart';
-import 'package:easylist/scoped-models/products.dart';
+import 'package:easylist/scoped-models/main.dart';
 import 'package:flutter/material.dart';
 
 import 'package:scoped_model/scoped_model.dart';
@@ -8,7 +8,7 @@ class ProductList extends StatelessWidget {
   ////////////////////////  PRODUCT EDIT BUTTON //////////////////////////////////
 
   Widget _productEditButton(
-      BuildContext context, int index, ProductModel model) {
+      BuildContext context, int index, MainModel model) {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SizedBox(
@@ -38,7 +38,7 @@ class ProductList extends StatelessWidget {
 
 //////////////////////// PRODUCT TILE //////////////////////////////////
 
-  Widget _productTile(BuildContext context, int index, ProductModel model) {
+  Widget _productTile(BuildContext context, int index, MainModel model) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, '/products/$index');
@@ -91,7 +91,7 @@ class ProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return ScopedModelDescendant(
-      builder: (BuildContext context, Widget child, ProductModel model) {
+      builder: (BuildContext context, Widget child, MainModel model) {
         return ListView.builder(
           itemBuilder: (BuildContext context, int index) {
             return Padding(

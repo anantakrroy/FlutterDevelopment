@@ -1,7 +1,6 @@
 
 import 'package:easylist/pages/product_edit.dart';
 import 'package:easylist/pages/product_list.dart';
-import '../models/product.dart';
 
 import 'package:flutter/material.dart';
 

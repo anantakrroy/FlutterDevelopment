@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import './widgets/helpers/ensure-visible.dart';
 import '../models/product.dart';
-import '../scoped-models/products.dart';
+import '../scoped-models/main.dart';
 
 class ProductEdit extends StatefulWidget {
   @override
@@ -110,8 +110,8 @@ class _ProductEditState extends State<ProductEdit> {
 
   ///////////PRODUCT CREATE/EDIT BUTTON///////////////////////////////
   Widget _buildProductCreateButton() {
-    return ScopedModelDescendant<ProductModel>(
-      builder: (BuildContext context, Widget child, ProductModel model) {
+    return ScopedModelDescendant<MainModel>(
+      builder: (BuildContext context, Widget child, MainModel model) {
         return Center(
           child: RaisedButton(
             color: Theme.of(context).accentColor,
@@ -139,6 +139,7 @@ class _ProductEditState extends State<ProductEdit> {
               description: _product['description'],
               price: _product['price'],
               image: _product['image'],
+              emailID: _product[]
             ),
           )
         : updateProduct(
@@ -183,7 +184,7 @@ class _ProductEditState extends State<ProductEdit> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return ScopedModelDescendant(
-      builder: (BuildContext context, Widget child, ProductModel model) {
+      builder: (BuildContext context, Widget child, MainModel model) {
         final Widget pageContent =_buildPageContent(context, model.selectedProduct);
         return model.selectedProductIndex == null
             ? pageContent

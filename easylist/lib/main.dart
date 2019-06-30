@@ -1,13 +1,13 @@
 import 'package:easylist/pages/auth.dart';
+import 'package:easylist/scoped-models/main.dart';
 import 'package:flutter/material.dart';
 
 import './pages/home.dart';
 import './pages/productmanage.dart';
 
 import './pages/productdetail.dart';
-import './models/product.dart';
 
-import 'package:easylist/scoped-models/products.dart';
+import 'package:easylist/scoped-models/main.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 void main() {
@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ScopedModel<ProductModel>(
+    return ScopedModel<MainModel>(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
           );
         },
       ),
-      model: ProductModel(),
+      model: MainModel(),
     );
   }
 }

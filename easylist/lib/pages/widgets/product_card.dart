@@ -1,6 +1,6 @@
 import 'package:easylist/pages/ui_elements/title_default.dart';
 import 'package:easylist/pages/widgets/address_tag.dart';
-import 'package:easylist/scoped-models/products.dart';
+import 'package:easylist/scoped-models/main.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import './price_tag.dart';
@@ -20,13 +20,13 @@ class ProductCard extends StatelessWidget {
       children: <Widget>[
         IconButton(
           icon: Icon(Icons.info),
-          color: Colors.blue,
+          color: Theme.of(context).accentColor,
           splashColor: Colors.blueAccent,
           onPressed: () => Navigator.pushNamed<bool>(
               context, '/product/' + prodIndex.toString()),
         ),
-        ScopedModelDescendant<ProductModel>(
-          builder: (BuildContext context, Widget child, ProductModel model) {
+        ScopedModelDescendant<MainModel>(
+          builder: (BuildContext context, Widget child, MainModel model) {
           return IconButton(
             icon: Icon(model.products[prodIndex].isFavorite ? Icons.favorite : Icons.favorite_border),
             color: Colors.red,
@@ -76,6 +76,20 @@ class ProductCard extends StatelessWidget {
     );
   }
 
+  /// USER INFO
+  /// Display the user Id and Email of User
+  /// 
+  
+  Widget _buildUserInfo() {
+    return Row(children: <Widget>[
+      ScopedModelDescendant(builder: (BuildContext context, Widget child, MainModel model) {
+        return Expanded(flex: 1,child: Text(model.login(email: product.emailID,).toString()));
+      },) ,
+      // Expanded(flex: 1,child: Text(),)
+    ],);
+  }
+  
+
   /////////////// BUILD /////////////////////////////////////////////////////
 
   @override
@@ -85,6 +99,7 @@ class ProductCard extends StatelessWidget {
       margin: EdgeInsets.all(10.0),
       child: Column(
         children: <Widget>[
+          _buildUserInfo(),
           _buildImageCard(),
           _buildTitlePriceRow(),
           AddressTag("FARMERS MARKET, LAKESIDE"),

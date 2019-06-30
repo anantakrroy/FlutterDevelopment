@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:scoped_model/scoped_model.dart';
-import 'package:easylist/scoped-models/products.dart';
+import 'package:easylist/scoped-models/main.dart';
 
 import '../models/product.dart';
 
@@ -132,7 +132,7 @@ class ProductDetail extends StatelessWidget {
         return Future.value(false);
       },
       child: ScopedModelDescendant(
-        builder: (BuildContext context, Widget child, ProductModel model) {
+        builder: (BuildContext context, Widget child, MainModel model) {
           final Product product = model.products[prodIndex];
           return Scaffold(
             appBar: AppBar(

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import 'package:scoped_model/scoped_model.dart';
+
+import '../scoped-models/main.dart';
 
 class AuthPage extends StatefulWidget {
   @override
@@ -107,11 +110,13 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   ////////////////////// SUBMIT FORM //////////////////////////////////////////
-  void _submitForm() {
+  void _submitForm(Function login) {
     if (!_formKey.currentState.validate() || !_formData['acceptTerms']) {
       return;
     }
+    login();
     _formKey.currentState.save();
+    
     Navigator.pushReplacementNamed(context, '/home');
   }
 
@@ -170,14 +175,16 @@ class _AuthPageState extends State<AuthPage> {
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 5.0),
-                        child: RaisedButton(
+                        child: ScopedModelDescendant(builder: (BuildContext context, Widget child, MainModel model) {
+                          return RaisedButton(
                           color: Theme.of(context).accentColor,
                           child: Text(
                             'LOGIN',
                             style: TextStyle(color: Colors.white),
                           ),
-                          onPressed: _submitForm,
-                        ),
+                          onPressed: () => _submitForm(model.login),
+                        );
+                        },),
                       ),
                     ],
                   ),
