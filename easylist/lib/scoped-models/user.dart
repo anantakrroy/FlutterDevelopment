@@ -1,8 +1,9 @@
 import 'package:easylist/models/user.dart';
-import 'package:scoped_model/scoped_model.dart';
+import './connected_products.dart';
 
-mixin UserModel on Model {
-  User login({String email, String password, String userID}) {
-    return User(id: 'newUser', email: email, password: password);
+mixin UserModel on ConnectedProducts {
+
+  void login(String email, String password) {
+    authenticatedUser = User(id: 'newUser', email: email, password: password);
   }
 }

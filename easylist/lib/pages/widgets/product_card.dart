@@ -80,14 +80,14 @@ class ProductCard extends StatelessWidget {
   /// Display the user Id and Email of User
   /// 
   
-  Widget _buildUserInfo() {
-    return Row(children: <Widget>[
-      ScopedModelDescendant(builder: (BuildContext context, Widget child, MainModel model) {
-        return Expanded(flex: 1,child: Text(model.login(email: product.emailID,).toString()));
-      },) ,
-      // Expanded(flex: 1,child: Text(),)
-    ],);
-  }
+  // Widget _buildUserInfo() {
+  //   return Row(children: <Widget>[
+  //     ScopedModelDescendant(builder: (BuildContext context, Widget child, MainModel model) {
+  //       return Expanded(flex: 1,child: Text(model.login(email: product.emailID,).toString()));
+  //     },) ,
+  //     // Expanded(flex: 1,child: Text(),)
+  //   ],);
+  // }
   
 
   /////////////// BUILD /////////////////////////////////////////////////////
@@ -99,8 +99,8 @@ class ProductCard extends StatelessWidget {
       margin: EdgeInsets.all(10.0),
       child: Column(
         children: <Widget>[
-          _buildUserInfo(),
           _buildImageCard(),
+          Text(product.emailID),
           _buildTitlePriceRow(),
           AddressTag("FARMERS MARKET, LAKESIDE"),
           _buildButtonBar(context),

@@ -44,7 +44,7 @@ class ProductList extends StatelessWidget {
         Navigator.pushNamed(context, '/products/$index');
       },
       child: Dismissible(
-        key: Key(model.products[index].title),
+        key: Key(model.myProducts[index].title),
         onDismissed: (DismissDirection direction) {
           if (direction == DismissDirection.endToStart) {
             model.selectProduct(index);
@@ -60,17 +60,17 @@ class ProductList extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.all(2.0),
               leading: CircleAvatar(
-                backgroundImage: AssetImage(model.products[index].image),
+                backgroundImage: AssetImage(model.myProducts[index].image),
               ),
               title: Text(
-                model.products[index].title,
+                model.myProducts[index].title,
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
-                '\$' + model.products[index].price.toString(),
+                '\$' + model.myProducts[index].price.toString(),
                 style: TextStyle(
                   color: Colors.grey[700],
                 ),
@@ -99,7 +99,7 @@ class ProductList extends StatelessWidget {
               child: _productTile(context, index, model),
             );
           },
-          itemCount: model.products.length,
+          itemCount: model.myProducts.length,
         );
       },
     );

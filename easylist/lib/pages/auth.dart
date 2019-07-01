@@ -114,8 +114,8 @@ class _AuthPageState extends State<AuthPage> {
     if (!_formKey.currentState.validate() || !_formData['acceptTerms']) {
       return;
     }
-    login();
     _formKey.currentState.save();
+    login(_formData['emailId'],_formData['password']);
     
     Navigator.pushReplacementNamed(context, '/home');
   }

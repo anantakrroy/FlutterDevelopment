@@ -19,6 +19,7 @@ class _ProductEditState extends State<ProductEdit> {
     'price': '',
     'description': '',
     'image': 'assets/buffet.jpg',
+
   };
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -117,8 +118,7 @@ class _ProductEditState extends State<ProductEdit> {
             color: Theme.of(context).accentColor,
             textColor: Colors.white,
             child: Text('SAVE'),
-            onPressed: () => _submitForm(model.addProduct, model.updateProduct,
-                model.selectedProductIndex),
+            onPressed: () => _submitForm(model.addProduct, model.updateProduct,model.selProdIndex),
           ),
         );
       },
@@ -126,29 +126,23 @@ class _ProductEditState extends State<ProductEdit> {
   }
 
   /////////////////////////// SUBMIT FORM //////////////////////////////////////////////
-  void _submitForm(Function addProduct, Function updateProduct,
-      [int selectedProductIndex]) {
+  void _submitForm(Function addProduct, Function updateProduct,[int selectedProductIndex]) {
     if (!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
     selectedProductIndex == null
         ? addProduct(
-            Product(
-              title: _product['title'],
-              description: _product['description'],
-              price: _product['price'],
-              image: _product['image'],
-              emailID: _product[]
-            ),
+            _product['title'],
+            _product['description'],
+            _product['image'],
+            _product['price'],
           )
         : updateProduct(
-            Product(
-              title: _product['title'],
-              description: _product['description'],
-              price: _product['price'],
-              image: _product['image'],
-            ),
+            _product['title'],
+            _product['description'],
+            _product['image'],
+            _product['price'],
           );
 
     Navigator.pushReplacementNamed(context, '/home');
@@ -185,7 +179,8 @@ class _ProductEditState extends State<ProductEdit> {
     // TODO: implement build
     return ScopedModelDescendant(
       builder: (BuildContext context, Widget child, MainModel model) {
-        final Widget pageContent =_buildPageContent(context, model.selectedProduct);
+        final Widget pageContent =
+            _buildPageContent(context, model.selectedProduct);
         return model.selectedProductIndex == null
             ? pageContent
             : Scaffold(
