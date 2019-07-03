@@ -118,7 +118,7 @@ class _ProductEditState extends State<ProductEdit> {
             color: Theme.of(context).accentColor,
             textColor: Colors.white,
             child: Text('SAVE'),
-            onPressed: () => _submitForm(model.addProduct, model.updateProduct,model.selProdIndex),
+            onPressed: () => _submitForm(model.addProduct, model.updateProduct,model.selectedProductIndex),
           ),
         );
       },
