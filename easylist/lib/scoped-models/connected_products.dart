@@ -6,7 +6,7 @@ import '../models/user.dart';
 mixin ConnectedProductsModel on Model {
   List<Product> _products = [];
   User _authenticatedUser;
-  int _selProdIndex;
+  int selProdIndex;
 
   void addProduct(
     String title, String description, String image, double price) {
@@ -18,7 +18,7 @@ mixin ConnectedProductsModel on Model {
         emailID: _authenticatedUser.email,
         userID: _authenticatedUser.id);
     _products.add(newProduct);
-    _selProdIndex = null;
+    selProdIndex = null;
     notifyListeners();
   }
 }
@@ -40,11 +40,11 @@ mixin ProductModel on ConnectedProductsModel {
   }
 
   int get selectedProductIndex {
-    return _selProdIndex;
+    return selProdIndex;
   }
 
   Product get selectedProduct {
-    if (_selProdIndex == null) {
+    if (selProdIndex == null) {
       return null;
     }
     return _products[selectedProductIndex];
@@ -64,13 +64,13 @@ mixin ProductModel on ConnectedProductsModel {
         emailID: selectedProduct.emailID,
         userID: selectedProduct.userID);
     _products[selectedProductIndex] = updatedProduct;
-    _selProdIndex = null;
+    selProdIndex = null;
     notifyListeners();
   }
 
   void deleteProduct() {
-    _products.removeAt(_selProdIndex);
-    _selProdIndex = null;
+    _products.removeAt(selProdIndex);
+    selProdIndex = null;
   }
 
   void favoriteProduct() {
@@ -87,17 +87,17 @@ mixin ProductModel on ConnectedProductsModel {
     );
     _products[selectedProductIndex] = updatedProduct;
     notifyListeners();
-    _selProdIndex = null;
+    selProdIndex = null;
   }
 
   void toggleDisplayMode() {
     _showFavorites = !_showFavorites;
     notifyListeners();
-    _selProdIndex = null;
+    selProdIndex = null;
   }
 
   void selectProduct(int index) {
-    _selProdIndex = index;
+    selProdIndex = index;
   }
 }
 

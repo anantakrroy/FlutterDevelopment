@@ -20,8 +20,6 @@ class _AuthPageState extends State<AuthPage> {
     'acceptTerms': false
   };
 
-  String _errorMessage = '';
-  Color _borderColor = Colors.blue[300];
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   FocusNode _emailNode = FocusNode();
@@ -49,7 +47,8 @@ class _AuthPageState extends State<AuthPage> {
         fillColor: Colors.purple[50],
         labelText: "Email",
         // errorText: _errorMessage,
-        errorStyle: TextStyle(backgroundColor: Colors.red[900],color: Colors.white),
+        errorStyle:
+            TextStyle(backgroundColor: Colors.red[900], color: Colors.white),
         hintText: "Enter Email Id",
         border: OutlineInputBorder(),
       ),
@@ -79,7 +78,8 @@ class _AuthPageState extends State<AuthPage> {
         fillColor: Colors.purple[50],
         labelText: "Password",
         hintText: "Enter Password",
-        errorStyle: TextStyle(backgroundColor: Colors.red[900],color: Colors.white),
+        errorStyle:
+            TextStyle(backgroundColor: Colors.red[900], color: Colors.white),
         border: OutlineInputBorder(),
       ),
       obscureText: true,
@@ -115,8 +115,8 @@ class _AuthPageState extends State<AuthPage> {
       return;
     }
     _formKey.currentState.save();
-    login(_formData['emailId'],_formData['password']);
-    
+    login(_formData['emailId'], _formData['password']);
+
     Navigator.pushReplacementNamed(context, '/home');
   }
 
@@ -175,16 +175,19 @@ class _AuthPageState extends State<AuthPage> {
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 5.0),
-                        child: ScopedModelDescendant(builder: (BuildContext context, Widget child, MainModel model) {
-                          return RaisedButton(
-                          color: Theme.of(context).accentColor,
-                          child: Text(
-                            'LOGIN',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: () => _submitForm(model.login),
-                        );
-                        },),
+                        child: ScopedModelDescendant(
+                          builder: (BuildContext context, Widget child,
+                              MainModel model) {
+                            return RaisedButton(
+                              color: Theme.of(context).accentColor,
+                              child: Text(
+                                'LOGIN',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () => _submitForm(model.login),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
