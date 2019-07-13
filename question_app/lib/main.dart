@@ -36,10 +36,7 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             //use of custom widget Questions
             Questions(questions[questionIndex]),
-            RaisedButton(
-              child: Text('Teal'),
-              onPressed: questionAnswered,
-            ),
+           
             RaisedButton(
               child: Text('Orange'),
               onPressed: questionAnswered,
