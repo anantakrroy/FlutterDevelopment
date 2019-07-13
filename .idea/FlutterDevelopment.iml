@@ -25,8 +25,12 @@
       <excludeFolder url="file://$MODULE_DIR$/flutter-desktop-embedding/plugins/window_size/build" />
       <excludeFolder url="file://$MODULE_DIR$/flutter-desktop-embedding/testbed/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/flutter-desktop-embedding/testbed/build" />
+      <excludeFolder url="file://$MODULE_DIR$/material-components-flutter-codelabs/mdc_100_series/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/material-components-flutter-codelabs/mdc_100_series/build" />
       <excludeFolder url="file://$MODULE_DIR$/notekeeper/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/notekeeper/build" />
+      <excludeFolder url="file://$MODULE_DIR$/question_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/question_app/build" />
       <excludeFolder url="file://$MODULE_DIR$/roughpad/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/roughpad/build" />
       <excludeFolder url="file://$MODULE_DIR$/stateful_fun/.pub" />
