@@ -4,13 +4,24 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-  var questionIndex = 0;
-  var questions = [
+class _MyAppState extends State<MyApp> {
+  int questionIndex = 0;
+
+  final List<String> questions = [
     'What is your favorite color ?',
     'What is your favorite fruit ?'
   ];
+
+  void questionAnswered() {
+    setState(() {
+      questionIndex += 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +35,15 @@ class MyApp extends StatelessWidget {
             Text(questions[questionIndex]),
             RaisedButton(
               child: Text('Teal'),
-              onPressed: () {},
+              onPressed: questionAnswered,
             ),
             RaisedButton(
               child: Text('Orange'),
-              onPressed: () {},
+              onPressed: questionAnswered,
             ),
             RaisedButton(
               child: Text('Purple'),
-              onPressed: () {},
+              onPressed: questionAnswered,
             ),
           ],
         ),
