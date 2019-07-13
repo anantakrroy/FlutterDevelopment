@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './questions.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -32,7 +34,8 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: <Widget>[
-            Text(questions[questionIndex]),
+            //use of custom widget Questions
+            Questions(questions[questionIndex]),
             RaisedButton(
               child: Text('Teal'),
               onPressed: questionAnswered,
