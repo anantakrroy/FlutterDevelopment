@@ -13,16 +13,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int questionIndex = 0;
+  int _questionIndex = 0;
 
-  final List<String> questions = [
-    'What is your favorite color ?',
-    'What is your favorite fruit ?'
+  final List<Map> questions = [
+    {
+      'questionText': 'What is your favorite color ?',
+      'answerOption': ['Teal', 'Orange', 'Blue', 'Purple']
+    },
+    {
+      'questionText': 'What is your favorite fruit ?',
+      'answerOption': ['Banana', 'Apple', 'Mango', 'Kiwi']
+    },
+    {
+      'questionText': 'What is your favorite animal ?',
+      'answerOption': ['Cat', 'Dog', 'Horse', 'Dolphin']
+    },
   ];
 
   void questionAnswered() {
     setState(() {
-      questionIndex += 1;
+      _questionIndex += 1;
     });
   }
 
@@ -36,10 +46,10 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: <Widget>[
             //use of custom widget Questions
-            Questions(questions[questionIndex]),
-            AnswerOption(questionAnswered),
-            AnswerOption(questionAnswered),
-            AnswerOption(questionAnswered),
+            Questions(questions[_questionIndex]['questionText']),
+            ...questions[_questionIndex]['answerOption'].map((answer) {
+              return RaisedButton(child: Text(answer),onPressed: questionAnswered,);
+            }).toList(),
           ],
         ),
       ),
