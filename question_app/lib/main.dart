@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './questions.dart';
-import './answer.dart';
+import './quiz.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,22 +17,39 @@ class _MyAppState extends State<MyApp> {
   final List<Map> questions = [
     {
       'questionText': 'What is your favorite color ?',
-      'answerOption': ['Teal', 'Orange', 'Blue', 'Purple']
+      'answerOption': [
+        {'option': 'Teal', 'score': 5},
+        {'option': 'Orange', 'score': 10},
+        {'option': 'Blue', 'score': 15},
+        {'option': 'Purple', 'score': 20}
+      ]
     },
     {
       'questionText': 'What is your favorite fruit ?',
-      'answerOption': ['Banana', 'Apple', 'Mango', 'Kiwi']
+      'answerOption': [
+        {'option': 'Banana', 'score': 5},
+        {'option': 'Apple', 'score': 10},
+        {'option': 'Mango', 'score': 15},
+        {'option': 'Kiwi', 'score': 20}
+      ]
     },
     {
       'questionText': 'What is your favorite animal ?',
-      'answerOption': ['Cat', 'Dog', 'Horse', 'Dolphin']
+      'answerOption': [
+        {'option': 'Cat', 'score': 5},
+        {'option': 'Dog', 'score': 10},
+        {'option': 'Horse', 'score': 15},
+        {'option': 'Dolphin', 'score': 20}
+      ]
     },
   ];
 
-  void questionAnswered() {
+  int _totalScore = 0;
+
+  void questionAnswered(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex += 1;
-      _questionIndex > 2 ? _questionIndex = 0 : _questionIndex ;
     });
   }
 
@@ -44,18 +60,13 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('The Questions App'),
         ),
-        body: Column(
-          children: <Widget>[
-            //use of custom widget Questions
-            Questions(questions[_questionIndex]['questionText']),
-            ...questions[_questionIndex]['answerOption'].map((answer) {
-              return RaisedButton(
-                child: Text(answer),
-                onPressed: questionAnswered,
-              );
-            }).toList(),
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Quiz(questions,_questionIndex,questionAnswered)
+            : Center(
+                child: Text(
+                'Yay! you have scored $_totalScore points!',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              )),
       ),
     );
   }
