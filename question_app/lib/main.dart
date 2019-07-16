@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   void questionAnswered() {
     setState(() {
       _questionIndex += 1;
+      _questionIndex > 2 ? _questionIndex = 0 : _questionIndex ;
     });
   }
 
@@ -48,7 +49,10 @@ class _MyAppState extends State<MyApp> {
             //use of custom widget Questions
             Questions(questions[_questionIndex]['questionText']),
             ...questions[_questionIndex]['answerOption'].map((answer) {
-              return RaisedButton(child: Text(answer),onPressed: questionAnswered,);
+              return RaisedButton(
+                child: Text(answer),
+                onPressed: questionAnswered,
+              );
             }).toList(),
           ],
         ),
