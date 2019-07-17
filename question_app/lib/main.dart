@@ -14,6 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _questionIndex = 0;
+  int _totalScore = 0;
 
   final List<Map> questions = [
     {
@@ -45,9 +46,14 @@ class _MyAppState extends State<MyApp> {
     },
   ];
 
-  int _totalScore = 0;
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
 
-  void questionAnswered(int score) {
+  void _questionAnswered(int score) {
     _totalScore += score;
     setState(() {
       _questionIndex += 1;
@@ -62,8 +68,8 @@ class _MyAppState extends State<MyApp> {
           title: Text('The Questions App'),
         ),
         body: _questionIndex < questions.length
-            ? Quiz(questions, _questionIndex, questionAnswered)
-            : Center(child: Result(_totalScore)),
+            ? Quiz(questions, _questionIndex, _questionAnswered)
+            : Center(child: Result(_totalScore, _resetQuiz)),
       ),
     );
   }
