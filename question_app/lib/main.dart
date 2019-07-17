@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './result.dart';
 import './quiz.dart';
 
 void main() {
@@ -61,12 +62,8 @@ class _MyAppState extends State<MyApp> {
           title: Text('The Questions App'),
         ),
         body: _questionIndex < questions.length
-            ? Quiz(questions,_questionIndex,questionAnswered)
-            : Center(
-                child: Text(
-                'Yay! you have scored $_totalScore points!',
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              )),
+            ? Quiz(questions, _questionIndex, questionAnswered)
+            : Center(child: Result(_totalScore)),
       ),
     );
   }
