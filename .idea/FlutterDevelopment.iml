@@ -11,6 +11,8 @@
       <excludeFolder url="file://$MODULE_DIR$/contacts_app/build" />
       <excludeFolder url="file://$MODULE_DIR$/easylist/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/easylist/build" />
+      <excludeFolder url="file://$MODULE_DIR$/expense_planner/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/expense_planner/build" />
       <excludeFolder url="file://$MODULE_DIR$/flutter-desktop-embedding/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/flutter-desktop-embedding/example/build" />
       <excludeFolder url="file://$MODULE_DIR$/flutter-desktop-embedding/plugins/color_panel/.pub" />
