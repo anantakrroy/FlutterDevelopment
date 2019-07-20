@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import './transaction.dart';
 
@@ -7,7 +8,7 @@ void main() {
 }
 
 class ExpensePlanner extends StatelessWidget {
-  List transactionList = [
+  final List transactionList = [
     Transaction(title: 't1', amount: 23.99, purchaseDate: DateTime.now()),
     Transaction(title: 't2', amount: 12.99, purchaseDate: DateTime.now()),
     Transaction(title: 't3', amount: 13.99, purchaseDate: DateTime.now()),
@@ -31,30 +32,59 @@ class ExpensePlanner extends StatelessWidget {
               ),
             ),
             Column(
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(labelText: 'Title'),
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: 'Amount'),
+                ),
+              ],
+            ),
+            Column(
               children: transactionList.map((transaction) {
                 return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Container(
                       margin: EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 15.0),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 2.0)),
+                          border: Border.all(color: Colors.purple, width: 2.0)),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Text(transaction.amount.toString()),
+                        child: Text(
+                          '\$${transaction.amount}',
+                          style: TextStyle(
+                            color: Colors.purple,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),
+                        ),
                       ),
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(transaction.title),
-                        Text(transaction.purchaseDate.toString()),
+                        Text(transaction.title,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0)),
+                        Text(
+                          DateFormat.yMMMd().format(transaction.purchaseDate),
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ],
                     ),
                   ],
                 );
               }).toList(),
-              mainAxisAlignment: MainAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
             ),
           ],
         ),
