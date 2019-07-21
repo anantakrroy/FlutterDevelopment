@@ -5,7 +5,18 @@ import './widgets/new_transaction.dart';
 import './models/transaction.dart';
 
 void main() {
-  runApp(ExpensePlanner());
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MaterialApp(
+      title: 'Expense Planner App',
+      home: ExpensePlanner(),
+    );
+  }
 }
 
 class ExpensePlanner extends StatefulWidget {
@@ -20,15 +31,7 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
     Transaction(title: 't3', amount: 13.99, purchaseDate: DateTime.now()),
   ];
 
-  void _addTransaction(String txTitle, double txAmount) {
-    final newTx = Transaction(
-        title: txTitle, amount: txAmount, purchaseDate: DateTime.now());
-    setState(() {
-      _transactionList.add(newTx);
-    });
-  }
-
-  void startAddNewTx(BuildContext ctx) {
+  void _startAddNewTx(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
@@ -36,6 +39,14 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
       },
     );
     print('Clicked add button!');
+  }
+
+  void _addTransaction(String txTitle, double txAmount) {
+    final newTx = Transaction(
+        title: txTitle, amount: txAmount, purchaseDate: DateTime.now());
+    setState(() {
+      _transactionList.add(newTx);
+    });
   }
 
   @override
@@ -46,14 +57,14 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
           title: Text('Expense Planner'),
           actions: <Widget>[
             IconButton(
-              onPressed: () => startAddNewTx(context),
+              onPressed: () => _startAddNewTx(context),
               icon: Icon(Icons.add),
             ),
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () => startAddNewTx(context),
+          onPressed: () => _startAddNewTx(context),
           child: Icon(Icons.add),
         ),
         body: ListView(
