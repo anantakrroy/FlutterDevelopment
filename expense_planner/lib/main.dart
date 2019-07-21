@@ -17,7 +17,7 @@ class ExpensePlanner extends StatelessWidget {
         appBar: AppBar(
           title: Text('Expense Planner'),
         ),
-        body: Column(
+        body: ListView(
           children: <Widget>[
             Container(
               width: double.infinity,

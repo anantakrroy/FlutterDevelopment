@@ -1,8 +1,12 @@
+import 'package:expense_planner/widgets/user_transactions.dart';
 import 'package:flutter/material.dart';
 
 class NewTransaction extends StatelessWidget {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
+  final Function addNewTx;
+
+  NewTransaction(this.addNewTx);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +27,8 @@ class NewTransaction extends StatelessWidget {
             child: Text('Add transaction'),
             color: Colors.purple[100],
             onPressed: () {
-              print(titleController.text);
-              print(amountController.text);
+              addNewTx(
+                  titleController.text, double.parse(amountController.text));
             },
           )
         ],
