@@ -1,4 +1,3 @@
-import 'package:expense_planner/widgets/user_transactions.dart';
 import 'package:flutter/material.dart';
 
 class NewTransaction extends StatelessWidget {
@@ -8,30 +7,44 @@ class NewTransaction extends StatelessWidget {
 
   NewTransaction(this.addNewTx);
 
+  void submitData() {
+    final enteredText = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
+
+    if (enteredText.isEmpty || enteredAmount <= 0) {
+      print('Enter valid title and amount');
+      return;
+    }
+
+    addNewTx(enteredText, enteredAmount);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          TextField(
-            decoration: InputDecoration(labelText: 'Title'),
-            controller: titleController,
-          ),
-          TextField(
-            decoration: InputDecoration(labelText: 'Amount'),
-            controller: amountController,
-          ),
-          RaisedButton(
-            child: Text('Add transaction'),
-            color: Colors.purple[100],
-            onPressed: () {
-              addNewTx(
-                  titleController.text, double.parse(amountController.text));
-            },
-          )
-        ],
+    return MaterialApp(
+      home: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            TextField(
+              decoration: InputDecoration(labelText: 'Title'),
+              controller: titleController,
+              onSubmitted: (_) => submitData(),
+            ),
+            TextField(
+              decoration: InputDecoration(labelText: 'Amount'),
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => submitData(),
+            ),
+            RaisedButton(
+              child: Text('Add transaction'),
+              color: Colors.purple[100],
+              onPressed: submitData,
+            )
+          ],
+        ),
       ),
     );
   }

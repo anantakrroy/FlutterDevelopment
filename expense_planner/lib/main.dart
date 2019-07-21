@@ -1,14 +1,42 @@
 import 'package:flutter/material.dart';
 
-import './widgets/user_transactions.dart';
+import './widgets/transaction_list.dart';
+import './widgets/new_transaction.dart';
+import './models/transaction.dart';
 
 void main() {
   runApp(ExpensePlanner());
 }
 
-class ExpensePlanner extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+class ExpensePlanner extends StatefulWidget {
+  @override
+  _ExpensePlannerState createState() => _ExpensePlannerState();
+}
+
+class _ExpensePlannerState extends State<ExpensePlanner> {
+  final List<Transaction> _transactionList = [
+    Transaction(title: 't1', amount: 23.99, purchaseDate: DateTime.now()),
+    Transaction(title: 't2', amount: 12.99, purchaseDate: DateTime.now()),
+    Transaction(title: 't3', amount: 13.99, purchaseDate: DateTime.now()),
+  ];
+
+  void _addTransaction(String txTitle, double txAmount) {
+    final newTx = Transaction(
+        title: txTitle, amount: txAmount, purchaseDate: DateTime.now());
+    setState(() {
+      _transactionList.add(newTx);
+    });
+  }
+
+  void startAddNewTx(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return NewTransaction(_addTransaction);
+      },
+    );
+    print('Clicked add button!');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +44,17 @@ class ExpensePlanner extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Expense Planner'),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () => startAddNewTx(context),
+              icon: Icon(Icons.add),
+            ),
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => startAddNewTx(context),
+          child: Icon(Icons.add),
         ),
         body: ListView(
           children: <Widget>[
@@ -27,7 +66,7 @@ class ExpensePlanner extends StatelessWidget {
                 elevation: 5.0,
               ),
             ),
-            UserTransactions(),
+            TransactionList(_transactionList),
           ],
         ),
       ),
