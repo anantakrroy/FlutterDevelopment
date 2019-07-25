@@ -70,6 +70,7 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
         floatingActionButton: FloatingActionButton(
           onPressed: () => _startAddNewTx(context),
           child: Icon(Icons.add),
+          backgroundColor: Theme.of(context).accentColor,
         ),
         body: ListView(
           children: <Widget>[
