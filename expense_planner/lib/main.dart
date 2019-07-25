@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expense Planner App',
       home: ExpensePlanner(),
+      theme: ThemeData(primarySwatch: Colors.purple),
     );
   }
 }
