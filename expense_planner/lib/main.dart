@@ -18,6 +18,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
+        fontFamily: 'Quicksand',
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                  fontFamily: 'Quicksand',
+                  fontSize: 20.0,
+                ),
+              ),
+        ),
       ),
     );
   }
@@ -30,16 +39,20 @@ class ExpensePlanner extends StatefulWidget {
 
 class _ExpensePlannerState extends State<ExpensePlanner> {
   final List<Transaction> _transactionList = [
-    Transaction(title: 't1', amount: 23.99, purchaseDate: DateTime.now()),
-    Transaction(title: 't2', amount: 12.99, purchaseDate: DateTime.now()),
-    Transaction(title: 't3', amount: 13.99, purchaseDate: DateTime.now()),
+    Transaction(title: 'T1', amount: 23.99, purchaseDate: DateTime.now()),
+    Transaction(title: 'T2', amount: 12.99, purchaseDate: DateTime.now()),
+    Transaction(title: 'T3', amount: 13.99, purchaseDate: DateTime.now()),
   ];
 
   void _startAddNewTx(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
-        return NewTransaction(_addTransaction);
+        return GestureDetector(
+          onTap: () {},
+          child: NewTransaction(_addTransaction),
+          behavior: HitTestBehavior.opaque,
+        );
       },
     );
     print('Clicked add button!');
@@ -55,36 +68,34 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Expense Planner'),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () => _startAddNewTx(context),
-              icon: Icon(Icons.add),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Expense Planner'),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () => _startAddNewTx(context),
+            icon: Icon(Icons.add),
+          ),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _startAddNewTx(context),
+        child: Icon(Icons.add),
+        backgroundColor: Theme.of(context).accentColor,
+      ),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            child: Card(
+              color: Colors.grey,
+              child: Text('CHART'),
+              elevation: 5.0,
             ),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _startAddNewTx(context),
-          child: Icon(Icons.add),
-          backgroundColor: Theme.of(context).accentColor,
-        ),
-        body: ListView(
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.grey,
-                child: Text('CHART'),
-                elevation: 5.0,
-              ),
-            ),
-            TransactionList(_transactionList),
-          ],
-        ),
+          ),
+          TransactionList(_transactionList),
+        ],
       ),
     );
   }
