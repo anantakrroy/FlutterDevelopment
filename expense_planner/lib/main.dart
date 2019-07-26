@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
-                  fontFamily: 'Quicksand',
+                  fontFamily: 'OpenSans',
                   fontSize: 20.0,
                 ),
               ),
