@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
+import './widgets/chart.dart';
 import './models/transaction.dart';
 
 void main() {
@@ -49,6 +50,16 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
     // Transaction(title: 'T3', amount: 13.99, purchaseDate: DateTime.now()),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _transactionList.where((tx) {
+      return tx.purchaseDate.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _startAddNewTx(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
@@ -89,18 +100,14 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
         child: Icon(Icons.add),
         backgroundColor: Theme.of(context).accentColor,
       ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.grey,
-              child: Text('CHART'),
-              elevation: 5.0,
-            ),
-          ),
-          TransactionList(_transactionList),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Chart(_recentTransactions),
+            TransactionList(_transactionList),
+          ],
+        ),
       ),
     );
   }
