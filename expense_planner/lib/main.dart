@@ -19,6 +19,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
         fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 17.0,
+            )),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
@@ -39,9 +44,9 @@ class ExpensePlanner extends StatefulWidget {
 
 class _ExpensePlannerState extends State<ExpensePlanner> {
   final List<Transaction> _transactionList = [
-    Transaction(title: 'T1', amount: 23.99, purchaseDate: DateTime.now()),
-    Transaction(title: 'T2', amount: 12.99, purchaseDate: DateTime.now()),
-    Transaction(title: 'T3', amount: 13.99, purchaseDate: DateTime.now()),
+    // Transaction(title: 'T1', amount: 23.99, purchaseDate: DateTime.now()),
+    // Transaction(title: 'T2', amount: 12.99, purchaseDate: DateTime.now()),
+    // Transaction(title: 'T3', amount: 13.99, purchaseDate: DateTime.now()),
   ];
 
   void _startAddNewTx(BuildContext ctx) {

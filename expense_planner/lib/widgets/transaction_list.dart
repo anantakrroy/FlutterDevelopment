@@ -12,55 +12,68 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: ListView.builder(
-        itemBuilder: (ctx, index) {
-          return Card(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+      child: transactionList.isEmpty
+          ? Column(
               children: <Widget>[
-                Container(
-                  margin:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Theme.of(context).primaryColor, width: 2.0)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      '\$${transactionList[index].amount.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                  ),
+                Text(
+                  'No transactions found!',
+                  style: Theme.of(context).textTheme.title,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(transactionList[index].title,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0)),
-                    Text(
-                      DateFormat.yMMMd()
-                          .format(transactionList[index].purchaseDate),
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
+                Image.asset(
+                  'assets/images/waiting.png',
+                 fit: BoxFit.cover,
+                )
               ],
+            )
+          : ListView.builder(
+              itemBuilder: (ctx, index) {
+                return Card(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 15.0),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Theme.of(context).primaryColor,
+                                width: 2.0)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '\$${transactionList[index].amount.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            transactionList[index].title,
+                            style: Theme.of(context).textTheme.title,
+                          ),
+                          Text(
+                            DateFormat.yMMMd()
+                                .format(transactionList[index].purchaseDate),
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+              itemCount: transactionList.length,
             ),
-          );
-        },
-        itemCount: transactionList.length,
-      ),
     );
   }
 }
