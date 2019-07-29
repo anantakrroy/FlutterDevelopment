@@ -48,8 +48,11 @@ class Chart extends StatelessWidget {
       margin: EdgeInsets.all(20),
       child: Row(
         children: dailyTransactionValue.map((data) {
-          return ChartBar(data['purchaseDay'], data['amount'],
-              (weeklySpending == 0.0 ? 0.0 : data['amount'] as double) / weeklySpending);
+          return ChartBar(
+            data['purchaseDay'],
+            data['amount'],
+            weeklySpending == 0.0 ? 0.0 : (data['amount'] as double) / weeklySpending,
+          );
         }).toList(),
       ),
     );
