@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
+import './chart_bar.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
@@ -27,10 +28,10 @@ class Chart extends StatelessWidget {
       print(totalSpent);
 
       return {
-        'purchaseDay': DateFormat.E().format(weekDay),
+        'purchaseDay': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totalSpent,
       };
-    }).toList();
+    });
   }
 
   @override
@@ -40,9 +41,9 @@ class Chart extends StatelessWidget {
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Row(
-        children: <Widget>[
-          // Chart(recentTransactions),
-        ],
+        children: dailyTransactionValue.map((data) {
+          return ChartBar(data['purchaseDay'], data['amount'], percentSpending);
+        }).toList(),
       ),
     );
   }
