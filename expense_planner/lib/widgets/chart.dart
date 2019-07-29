@@ -34,6 +34,12 @@ class Chart extends StatelessWidget {
     });
   }
 
+  double get weeklySpending {
+    return dailyTransactionValue.fold(0.0, (sum, mapItem) {
+      return sum + mapItem['amount'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     print(dailyTransactionValue);
@@ -42,7 +48,8 @@ class Chart extends StatelessWidget {
       margin: EdgeInsets.all(20),
       child: Row(
         children: dailyTransactionValue.map((data) {
-          return ChartBar(data['purchaseDay'], data['amount'], percentSpending);
+          return ChartBar(data['purchaseDay'], data['amount'],
+              (weeklySpending == 0.0 ? 0.0 : data['amount'] as double) / weeklySpending);
         }).toList(),
       ),
     );
