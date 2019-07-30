@@ -7,8 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65790550-eaa1-4866-9103-0a261fa4b479" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expense_planner/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/expense_planner/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expense_planner/lib/widgets/chart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/expense_planner/lib/widgets/chart.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="25" />
     <option name="width" value="1755" />
     <option name="height" value="1085" />
@@ -42,10 +41,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="ProjectPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -105,7 +104,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="20" y="0" width="1404" height="868" extended-state="0" />
+    <frame x="20" y="0" width="1404" height="868" extended-state="1" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24255952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

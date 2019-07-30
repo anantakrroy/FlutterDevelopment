@@ -47,6 +47,7 @@ class Chart extends StatelessWidget {
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: dailyTransactionValue.map((data) {
           return ChartBar(
             data['purchaseDay'],
