@@ -38,13 +38,13 @@ class _NewTransactionState extends State<NewTransaction> {
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleController,
-              // onSubmitted: (_) => submitData(),
+              onSubmitted: (_) => submitData(),
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
               keyboardType: TextInputType.number,
-              // onSubmitted: (_) => submitData(),
+              onSubmitted: (_) => submitData(),
             ),
             RaisedButton(
               child: Text('Add transaction',style: TextStyle(color: Colors.white),),

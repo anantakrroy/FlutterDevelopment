@@ -64,11 +64,7 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
-        return GestureDetector(
-          onTap: () {},
-          child: NewTransaction(_addTransaction),
-          behavior: HitTestBehavior.opaque,
-        );
+        return NewTransaction(_addTransaction);
       },
     );
     print('Clicked add button!');
