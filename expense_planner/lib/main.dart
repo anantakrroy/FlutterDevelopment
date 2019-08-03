@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       home: ExpensePlanner(),
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
+        accentColor: Colors.orange[800],
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
@@ -71,11 +71,21 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
     print('Clicked add button!');
   }
 
-  void _addTransaction(String txTitle, double txAmount) {
+  void _addTransaction(String txTitle, double txAmount, DateTime selectedDate) {
     final newTx = Transaction(
-        title: txTitle, amount: txAmount, purchaseDate: DateTime.now());
+      title: txTitle,
+      amount: txAmount,
+      purchaseDate: selectedDate,
+      id: DateTime.now().toString(),
+    );
     setState(() {
       _transactionList.add(newTx);
+    });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _transactionList.removeWhere((tx) => tx.id == id);
     });
   }
 
@@ -102,7 +112,7 @@ class _ExpensePlannerState extends State<ExpensePlanner> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(_transactionList),
+            TransactionList(_transactionList, _deleteTransaction),
           ],
         ),
       ),
