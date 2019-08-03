@@ -23,5 +23,8 @@ Short App demo -
 
 <img src="./easylist/app_demo/easylist.gif" alt="App demo" width="250" height="400"/>
 
+#### 4. Expense Planner - Keep track of your weekly expenses
 
+Short App demo -
 
+<img src="./expense_planner/app_demo/expenseplanner.gif" alt="App demo" width="250" height="400"/>
