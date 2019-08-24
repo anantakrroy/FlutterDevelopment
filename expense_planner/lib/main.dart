@@ -45,11 +45,7 @@ class ExpensePlanner extends StatefulWidget {
 }
 
 class _ExpensePlannerState extends State<ExpensePlanner> {
-  final List<Transaction> _transactionList = [
-    // Transaction(title: 'T1', amount: 23.99, purchaseDate: DateTime.now()),
-    // Transaction(title: 'T2', amount: 12.99, purchaseDate: DateTime.now()),
-    // Transaction(title: 'T3', amount: 13.99, purchaseDate: DateTime.now()),
-  ];
+  final List<Transaction> _transactionList = [];
 
   List<Transaction> get _recentTransactions {
     return _transactionList.where((tx) {
